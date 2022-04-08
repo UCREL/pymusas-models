@@ -22,7 +22,7 @@ For more detailed information on the rule based tagger go to the following [PyMU
 
 ## Model naming conventions
  
-We expect all model packages to follow the naming convention of `[lang]_[name]`, which is the same convention as [spaCy uses](https://github.com/explosion/spacy-models#model-naming-conventions). The name is then split into:
+We expect all model packages to follow the naming convention of `[lang]_[name]`, whereby `lang` is a [BCP 47 code] of the language, which is a similar convention as [spaCy uses](https://github.com/explosion/spacy-models#model-naming-conventions). The name is then split into:
 
 * **rules** used:
     * `single`: Only a single word lexicon is used.
@@ -30,6 +30,7 @@ We expect all model packages to follow the naming convention of `[lang]_[name]`,
 * **POS Mapping** used to map the POS tagset from the tagged text to the POS tagset used in the lexicons of the rule based tagger.
     * `upos2usas`: Maps from [UPOS](https://universaldependencies.org/u/pos/) tagged text to USAS core tagset of the lexicons.
     * `Bcorcencc2usas`: Maps [Basic CorCenCC](https://ucrel.github.io/pymusas/api/pos_mapper) tagged text to USAS core tagset of the lexicons.
+    * `None`: No POS mapper was used.
 * **ranker** the ranker used to determine the best lexicon entry match for the token.
     * `contextual`: Uses the `ContextualRuleBasedRanker`, which ranks based on heuristic rules and then finds the best lexicon match for each token taking into account all other tokens in the text. For more details on this ranker see the [ContextualRuleBasedRanker documentation]().
 

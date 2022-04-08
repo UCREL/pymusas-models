@@ -1,0 +1,156 @@
+{
+    "cmn": {
+        "resources":[
+            {
+                "data type": "single", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Chinese/semantic_lexicon_chi.tsv"
+            }, 
+            {
+                "data type": "mwe", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Chinese/mwe-chi.tsv"
+            }
+        ],
+        "model information": {
+            "POS mapper": "UPOS"
+        },
+        "language data": {
+            "description": "Mandarin Chinese",
+            "macrolanguage": "zh",
+            "script": "Hani"
+        }
+    },
+    "nl" : {
+        "resources":[
+            {
+                "data type": "single", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Dutch/semantic_lexicon_dut.tsv"
+            }
+        ],
+        "model information": {
+            "POS mapper": "UPOS"
+        },
+        "language data":{
+            "description": "Dutch, Flemish",
+            "macrolanguage": "nl",
+            "script": "Latn"
+        }
+        
+    },
+    "fr": {
+        "resources":[
+            {
+                "data type": "single", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/French/semantic_lexicon_fr.tsv"
+            }
+        ],
+        "model information": {
+            "POS mapper": "UPOS"
+        },
+        "language data":{
+            "description": "French",
+            "macrolanguage": "fr",
+            "script": "Latn"
+        }
+        
+    },
+    "it": {
+        "resources":[
+            {
+                "data type": "single", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Italian/semantic_lexicon_ita.tsv"
+            },
+            {
+                "data type": "mwe", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Italian/mwe-ita.tsv"
+            }
+        ],
+        "model information": {
+            "POS mapper": "UPOS"
+        },
+        "language data":{
+            "description": "Italian",
+            "macrolanguage": "it",
+            "script": "Latn"
+        }
+        
+    },
+    "pt": {
+        "resources": [
+            {
+                "data type": "single", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Portuguese/semantic_lexicon_pt.tsv"
+            },
+            {
+                "data type": "mwe", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Portuguese/mwe-pt.tsv"
+            }
+        ],
+        "model information": {
+            "POS mapper": "UPOS"
+        },
+        "language data":{
+            "description": "Portuguese",
+            "macrolanguage": "pt",
+            "script": "Latn"
+        }
+        
+    },
+    "es": {
+        "resources":[
+            {
+                "data type": "single", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Spanish/semantic_lexicon_es.tsv"
+            },
+            {
+                "data type": "mwe", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Spanish/mwe-es.tsv"
+            }
+        ],
+        "model information": {
+            "POS mapper": "UPOS"
+        },
+        "language data":{
+            "description": "Spanish, Castilian",
+            "macrolanguage": "es",
+            "script": "Latn"
+        }
+    },
+    "cy": {
+        "resources":[
+            {
+                "data type": "single", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Welsh/semantic_lexicon_cy.tsv"
+            },
+            {
+                "data type": "mwe", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Welsh/mwe-welsh.tsv"
+            }
+        ],
+        "model information": {
+            "POS mapper": "BasicCorCenCC"
+        },
+        "language data":{
+            "description": "Welsh",
+            "macrolanguage": "cy",
+            "script": "Latn"
+        }
+        
+    },
+    "id": {
+        "resources":[
+            {
+                "data type": "single", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Indonesian/semantic_lexicon_id.tsv"
+            }
+        ],
+        "model information": {
+            "POS mapper": null
+        },
+        "language data":{
+            "description": "Indonesian",
+            "macrolanguage": "ms",
+            "script": "Latn"
+        }
+        
+    }
+}
