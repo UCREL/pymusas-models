@@ -5,15 +5,20 @@
 Can be installed on all operating systems and supports Python version >= 3.7, to install run:
 
 ``` bash
-pip install -r requirements.txt
+pip install -e .
 ```
+
+## General folder structure
+
+* `/pymusas_models` - contains helper modules that are used by scripts within the `/scripts` folder.
+* `/scripts` - contains scripts that are used to create the PyMUSAS models.
 
 ### Running linters
 
 This code base uses flake8 and mypy to ensure that the format of the code is consistent and contain type hints. The flake8 settings can be found in [.flake8](./.flake8) and the mypy settings within [pyproject.toml](./pyproject.toml). To run these linters:
 
 ``` bash
-isort scripts
+isort scripts pymusas_models
 flake8
 mypy
 ```

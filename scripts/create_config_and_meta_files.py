@@ -1,16 +1,18 @@
-import json
-from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
-import math
 import hashlib
+import json
+import math
+from pathlib import Path
 import tempfile
+from typing import Any, Dict, List, Optional, Tuple
 
 import pymusas
 from pymusas.spacy_api import lexicon_collection, pos_mapper, rankers  # noqa: F401
 from pymusas.spacy_api.taggers import rule_based, rules  # noqa: F401
 import spacy
-from spacy.cli.package import package, generate_readme
+from spacy.cli.package import package
 import srsly
+
+from pymusas_models.readme_generator import generate_readme
 
 
 PYMUSAS_LANG_TO_SPACY = {
@@ -42,8 +44,8 @@ def create_description(language_name: str, package_name: str,
     
     description = (f'# {package_name}\n'
                    f'<p>\n{dist_shield_0}\n{dist_shield_1}\n</p>\n\n'
-                   f'> **Checksum (SHA256) .tar.gz:** {tar_gz_checksum}\n\n'
-                   f'> **Checksum (SHA256) .whl:**`{wheel_checksum}`\n\n'
+                   f'> **Checksum (SHA256) .tar.gz:** `{tar_gz_checksum}`\n\n'
+                   f'> **Checksum (SHA256) .whl:** `{wheel_checksum}`\n\n'
                    f'{language_name} USAS semantic tagger')
     return description
 
@@ -75,7 +77,8 @@ def add_model_specific_meta_data(model_directory: Path, language_name: str,
         non_spacy_lang_code_file_name = '_'.join(dist_file.name.split('_')[1:])
         non_spacy_lang_code_file_path = Path(dist_file.parent,
                                              non_spacy_lang_code_file_name)
-        dist_file = dist_file.rename(non_spacy_lang_code_file_path)
+        dist_file.rename(non_spacy_lang_code_file_path)
+        dist_file = non_spacy_lang_code_file_path
         dist_size = dist_file.stat().st_size
         if dist_size > max_model_size:
             max_model_size = dist_size
