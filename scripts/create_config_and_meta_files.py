@@ -42,8 +42,8 @@ def create_description(language_name: str, package_name: str,
     
     description = (f'# {package_name}\n'
                    f'<p>\n{dist_shield_0}\n{dist_shield_1}\n</p>\n\n'
-                   f'> **Checksum .tar.gz:** {tar_gz_checksum}\n\n'
-                   f'> **Checksum .whl:**`{wheel_checksum}`\n\n'
+                   f'> **Checksum (SHA256) .tar.gz:** {tar_gz_checksum}\n\n'
+                   f'> **Checksum (SHA256) .whl:**`{wheel_checksum}`\n\n'
                    f'{language_name} USAS semantic tagger')
     return description
 
