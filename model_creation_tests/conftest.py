@@ -61,6 +61,7 @@ def virtual_env_directory(request: SubRequest, overwrite: bool) -> Path:
                               f" be empty: {venv_directory}")
     print(venv_directory)
     venv_directory.mkdir()
+    raise ValueError(venv_directory)
     return venv_directory
 
 
