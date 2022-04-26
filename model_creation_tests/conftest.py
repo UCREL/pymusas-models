@@ -60,6 +60,9 @@ def virtual_env_directory(request: SubRequest, overwrite: bool) -> Path:
         raise FileExistsError("Expecting the virtual environment directory to"
                               f" be empty: {venv_directory}")
     os.mkdir(venv_directory)
+    print(venv_directory.cwd())
+    print(venv_directory)
+    raise ValueError()
     return venv_directory
 
 
