@@ -64,6 +64,8 @@ def virtual_env_directory(request: SubRequest, overwrite: bool) -> Path:
     print(venv_directory.cwd())
     print(venv_directory.parent)
     print(list(venv_directory.parent.iterdir()))
+    print(list(venv_directory.iterdir()))
+    print('done')
     raise ValueError(venv_directory)
     return venv_directory
 
