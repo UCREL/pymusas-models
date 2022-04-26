@@ -76,7 +76,7 @@ jobs:
       - name: tests on Windows
         if: ${{ runner.os == 'Windows' }}
         run: |
-          pytest --virtual-env-directory=.\temp_venv --overwrite .\model_creation_tests
+          pytest --virtual-env-directory=.\temp_venv .\model_creation_tests
           dir .
           dir .\temp_venv
           dir .\temp_venv\temp_venv
