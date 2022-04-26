@@ -11,6 +11,10 @@ from pytest_fixture_config import Config, yield_requires_config
 from pytest_virtualenv import VirtualEnv
 
 
+import logging
+import sys
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+
 class FixtureConfig(Config):
     __slots__ = ('virtualenv_executable')
 
