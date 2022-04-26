@@ -63,10 +63,6 @@ jobs:
         if: ${{ runner.os == 'macOS' || runner.os == 'Linux' }}
         run: |
           make model-creation-tests
-          ls -al
-          ls -al ./temp_venv
-          ls -al ./temp_venv/.env
-          ls -al ./temp_venv/.env/bin
           make model-function-tests
 
       - name: tests on Windows
