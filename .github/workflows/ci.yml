@@ -44,11 +44,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install --upgrade --upgrade-strategy eager -r requirements.txt -r dev_requirements.txt
 
-      - name: isort
-        run: isort --check-only pymusas_models model_function_tests model_creation_tests
+      #- name: isort
+      #  run: isort --check-only pymusas_models model_function_tests model_creation_tests
       
-      - name: flake8
-        run: flake8
+      #- name: flake8
+      #  run: flake8
 
       #- name: Cache mypy
       #  uses: actions/cache@v2
