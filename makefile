@@ -15,6 +15,8 @@ model-function-tests:
 	echo "break"
 	ls -al ./temp_venv/venv/bin
 	echo "break"
+	cat ./temp_venv/venv/bin/activate
+	source --help
 	source ./temp_venv/venv/bin/activate
 	pytest ./model_function_tests
 	deactivate
