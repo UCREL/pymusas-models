@@ -91,6 +91,5 @@ def session_virtualenv(virtual_env_directory: Path
     venv = VirtualEnv(workspace=virtual_env_directory, name='venv',
                       delete_workspace=False)
     print(list(virtual_env_directory.iterdir()))
-    raise ValueError()
     yield venv
     venv.teardown()
