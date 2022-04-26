@@ -79,9 +79,6 @@ jobs:
           pytest --virtual-env-directory=temp_venv .\model_creation_tests
           dir .
           dir .\temp_venv
-          dir .\temp_venv\temp_venv
-          dir .\temp_venv\temp_venv\venv
-          dir .\temp_venv\temp_venv\venv\Scripts
           .\temp_venv\venv\Scripts\Activate.ps1
           pytest .\model_function_tests
           deactivate
