@@ -11,8 +11,6 @@ def test_create_and_install_models(tmp_path: Path,
     repo_directory = Path(__file__, '..', '..').resolve()
     requirements_file = str(Path(repo_directory, 'requirements.txt'))
     dev_requirements_file = str(Path(repo_directory, 'dev_requirements.txt'))
-    session_virtualenv.install_package("'setuptools>=42' wheel",
-                                       installer="pip")
     session_virtualenv.install_package(f"-r {requirements_file}",
                                        installer="pip")
     session_virtualenv.install_package(f"-r {dev_requirements_file}",
