@@ -81,7 +81,7 @@ def session_virtualenv(virtual_env_directory: Path
         pip (`path.path`)           : Path to this virtualenv's pip executable
         .. also inherits all attributes from the `workspace` fixture
     """
-    venv = VirtualEnv(workspace=virtual_env_directory,
+    venv = VirtualEnv(workspace=virtual_env_directory, name='venv',
                       delete_workspace=False)
     yield venv
     venv.teardown()

@@ -5,7 +5,17 @@ model-creation-tests:
 	pytest --virtual-env-directory=./temp_venv --overwrite ./model_creation_tests
 
 model-function-tests:
-	source ./temp_venv/.env/bin/activate
+	pwd
+	echo "break"
+	ls -al
+	echo "break"
+	ls -al ./temp_venv
+	echo "break"
+	ls -al ./temp_venv/venv
+	echo "break"
+	ls -al ./temp_venv/venv/bin
+	echo "break"
+	source ./temp_venv/venv/bin/activate
 	pytest ./model_function_tests
 	deactivate
 
