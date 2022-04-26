@@ -24,6 +24,7 @@ def generate_readme(meta: Dict[str, Any]) -> str:
     vecs = meta.get("vectors", {})
     vectors = f"{vecs.get('keys', 0)} keys, {vecs.get('vectors', 0)} unique vectors ({ vecs.get('width', 0)} dimensions)"
     author = meta.get("author") or "n/a"
+    model_size = meta.get("size") or "n/a"
     notes = meta.get("notes", "")
     license_name = meta.get("license")
     sources = _format_sources(meta.get("sources"))
@@ -40,6 +41,7 @@ def generate_readme(meta: Dict[str, Any]) -> str:
         (md.bold("Sources"), sources or "n/a"),
         (md.bold("License"), md.code(license_name) if license_name else "n/a"),
         (md.bold("Author"), md.link(author, meta["url"]) if "url" in meta else author),
+        (md.bold("Model size"), model_size),
     ]
     # Put together Markdown body
     if description:

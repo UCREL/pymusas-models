@@ -3,3 +3,6 @@ __pycache__
 .vscode
 models
 *.egg-info
+build
+.pytest_cache
+temp_venv

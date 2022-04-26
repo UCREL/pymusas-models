@@ -1,3 +1,4 @@
+
 import hashlib
 import json
 import math
@@ -9,12 +10,13 @@ import pymusas
 from pymusas.spacy_api import lexicon_collection, pos_mapper, rankers  # noqa: F401
 from pymusas.spacy_api.taggers import rule_based, rules  # noqa: F401
 import spacy
-from spacy.cli.package import package
 import srsly
+import typer
 
-from pymusas_models.readme_generator import generate_readme
+from pymusas_models.package import generate_readme, package
 
 
+REPO_DIRECTORY = Path(__file__, '..', '..').resolve()
 PYMUSAS_LANG_TO_SPACY = {
     'cmn': 'zh',
     'nl': 'nl',
@@ -25,6 +27,15 @@ PYMUSAS_LANG_TO_SPACY = {
     'cy': 'xx',
     'id': 'id'
 }
+app = typer.Typer()
+OPTION = typer.Option
+
+
+def create_notes(package_name: str) -> str:
+    package_wheel_url = ("https://github.com/UCREL/pymusas-models/releases/"
+                         f"download/{package_name}/{package_name}"
+                         "-py3-none-any.whl")
+    return (f"# Installation\n``` bash\npip install {package_wheel_url}\n```")
 
 
 def create_description(language_name: str, package_name: str,
@@ -52,6 +63,19 @@ def create_description(language_name: str, package_name: str,
 
 def add_model_specific_meta_data(model_directory: Path, language_name: str,
                                  package_name: str) -> None:
+    '''
+    All of this meta data is specific to each model, also it will only be
+    used to generate the README and won't be accessible through the models
+    `meta` attribute.
+
+    meta data added:
+
+    * More accurate `spacy_version`
+    * SHA256 checksums for both the `.tar.gz` and `wheel` build files.
+    * File size, in MB, of the largest build file.
+    * Description - see `create_description` function.
+    * Notes - see `create_notes` function.
+    '''
     model_meta_file = Path(model_directory, 'meta.json')
     if not model_meta_file.exists():
         file_err = (f'Could not find the model meta file {model_meta_file}.')
@@ -74,11 +98,6 @@ def add_model_specific_meta_data(model_directory: Path, language_name: str,
     
     max_model_size = 0
     for dist_file in dist_files:
-        non_spacy_lang_code_file_name = '_'.join(dist_file.name.split('_')[1:])
-        non_spacy_lang_code_file_path = Path(dist_file.parent,
-                                             non_spacy_lang_code_file_name)
-        dist_file.rename(non_spacy_lang_code_file_path)
-        dist_file = non_spacy_lang_code_file_path
         dist_size = dist_file.stat().st_size
         if dist_size > max_model_size:
             max_model_size = dist_size
@@ -108,7 +127,7 @@ def add_model_specific_meta_data(model_directory: Path, language_name: str,
                                                         dist_file_name_tuple,
                                                         model_meta_data["checksum"],
                                                         model_meta_data["checksum_whl"])
-    
+    model_meta_data["notes"] = create_notes(package_name)
     # Given the updated meta data we update the README.
     readme_file = Path(model_directory, 'README.md')
     with readme_file.open('w', encoding='utf-8') as readme_fp:
@@ -116,6 +135,16 @@ def add_model_specific_meta_data(model_directory: Path, language_name: str,
 
 
 def add_default_meta_data(spacy_meta: Dict[str, Any]) -> None:
+    '''
+    Adds the following meta data to the `spacy_meta` object (all of these are
+    used as meta data for the Python package), all of this meta data will be
+    easily accessible through the models `meta` attribute:
+
+    * author
+    * email - authors email address
+    * url - URL associated to the models/project/author
+    * license
+    '''
     spacy_meta["author"] = "UCREL Research Centre"
     spacy_meta["email"] = "ucrel@lancaster.ac.uk"
     spacy_meta["url"] = "https://ucrel.github.io/pymusas/"
@@ -124,7 +153,14 @@ def add_default_meta_data(spacy_meta: Dict[str, Any]) -> None:
 
 def create_pymusas_config(spacy_config: Dict[str, Any], single_lexicon_url: str,
                           model_pos_mapper: Optional[str],
-                          mwe_lexicon_url: Optional[str] = None) -> None:
+                          language_code: str,
+                          mwe_lexicon_url: Optional[str]) -> None:
+    '''
+    Creates the part of the config for the `pymusas_rule_based_tagger` and
+    adds it to the already existing `spacy_config`. For more details on the
+    format for a spaCy config see the
+    [spaCy config format.](https://spacy.io/api/data-formats#config)
+    '''
     
     def create_pos_mapper_dict(pos_mapper_registered_function: Optional[str]
                                ) -> Optional[Dict[str, str]]:
@@ -183,7 +219,7 @@ def create_pymusas_config(spacy_config: Dict[str, Any], single_lexicon_url: str,
             "single": single_lexicon_rule
         }
     }
-    if mwe_lexicon_url:
+    if mwe_lexicon_url is not None:
         lexicon_rules["*"]["mwe"] = mwe_lexicon_rule
 
     spacy_config["pymusas_rules"] = lexicon_rules
@@ -203,15 +239,42 @@ def create_pymusas_config(spacy_config: Dict[str, Any], single_lexicon_url: str,
     }
 
 
-if __name__ == '__main__':
-    repo_directory = Path(__file__, '..', '..').resolve()
-    language_resource_file = Path(repo_directory, 'language_resources.json')
+MODEL_DIRECTORY_HELP = '''
+A path to a directory whereby all of the PyMUSAS models will be stored
+in their own separate folders within this directory.
+'''
+LANGUAGE_RESOURCE_FILE_HELP = '''
+A path to a language resource meta data file, see the `developer_readme`
+under section `Language Resource Meta Data` for details
+on how the meta data should be structured. This meta data file specifies
+what PyMUSAS models should be created based on the meta data contents.
+'''
+
+
+@app.command("create-models")
+def create_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'models'),
+                                                  help=MODEL_DIRECTORY_HELP,
+                                                  exists=False, file_okay=False,
+                                                  dir_okay=True, resolve_path=True),
+                  language_resource_file: Path = OPTION(Path(REPO_DIRECTORY, 'language_resources.json'),
+                                                        help=LANGUAGE_RESOURCE_FILE_HELP,
+                                                        exists=True, file_okay=True,
+                                                        dir_okay=False, writable=False,
+                                                        readable=True, resolve_path=True)
+                  ) -> None:
+    '''
+    Creates all of the PyMUSAS models, based on the meta data within the
+    `language_resource_file`, and stores all of these models within the given
+    `models_directory`.
+    '''
     meta_data: Dict[str, Any] = {}
     with language_resource_file.open('r', encoding='utf-8') as _file:
         meta_data = json.load(_file)
     assert meta_data, f'The {language_resource_file} is empty.'
 
     for language_code, data in meta_data.items():
+        if language_code == 'nl':
+            continue
         resources: List[Dict[str, str]] = data['resources']
         single_lexicon_url = ''
         mwe_lexicon_url = ''
@@ -243,39 +306,55 @@ if __name__ == '__main__':
         
         spacy_pipeline = spacy.blank(PYMUSAS_LANG_TO_SPACY[language_code])
         spacy_pipeline.add_pipe("pymusas_rule_based_tagger", config=pymusas_config)
-        create_pymusas_config(spacy_pipeline.config, single_lexicon_url,
-                              model_pos_mapper)
-        try:
-            spacy_pipeline.initialize()
-            add_default_meta_data(spacy_pipeline.meta)
-            with tempfile.TemporaryDirectory() as temp_dir:
-                temp_dir_path = Path(temp_dir)
-                spacy_pipeline.to_disk(temp_dir_path)
-                #
-                model_name = f'{language_code}_single_{model_pos_mapper}_contextual'
-                model_version = pymusas.__version__
-                package_name = f'{model_name}-{model_version}'
-                spacy_lang_code = PYMUSAS_LANG_TO_SPACY[language_code]
-                # Create model
-                models_directory = Path(repo_directory, 'models')
-                models_directory.mkdir(parents=True, exist_ok=True)
-                package(temp_dir_path, models_directory, create_sdist=True,
-                        create_wheel=True, name=model_name,
-                        version=model_version)
-                
-                model_directory = Path(models_directory,
-                                       f'{spacy_lang_code}_{package_name}')
-                
-                add_model_specific_meta_data(model_directory,
-                                             language_data['description'],
-                                             package_name)
-                break
 
-        except Exception:
-            line_break = "-" * 20
-            error_msg = (f"\n{line_break}\n"
-                         f"Error occurred for language code: {language_code}.\n\n"
-                         "Configuration file of the spaCy pipeline being "
-                         f"initialized: {json.dumps(spacy_pipeline.config, sort_keys=True, indent=4)}")
-            print(error_msg)
-            raise
+        # Want to create a pipeline per model permutation
+        model_permutations = ['single']
+        if mwe_lexicon_url:
+            model_permutations.append('dual')
+        
+        for model_permutation in model_permutations:
+            print(f'{language_code} {model_permutation}')
+            if model_permutation == 'single':
+                create_pymusas_config(spacy_pipeline.config, single_lexicon_url,
+                                      model_pos_mapper, language_code, None)
+            else:
+                create_pymusas_config(spacy_pipeline.config, single_lexicon_url,
+                                      model_pos_mapper, language_code,
+                                      mwe_lexicon_url)
+            try:
+                spacy_pipeline.initialize()
+                add_default_meta_data(spacy_pipeline.meta)
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    temp_dir_path = Path(temp_dir)
+                    spacy_pipeline.to_disk(temp_dir_path)
+
+                    model_name = (f'{language_code}_{model_permutation}_'
+                                  f'{model_pos_mapper}_contextual')
+                    model_version = pymusas.__version__
+                    package_name = f'{model_name}-{model_version}'
+                    
+                    # Create model
+                    models_directory.mkdir(parents=True, exist_ok=True)
+                    package(temp_dir_path, models_directory,
+                            create_sdist=True,
+                            create_wheel=True, name=model_name,
+                            version=model_version)
+                    model_directory = Path(models_directory, f'{package_name}')
+                    add_model_specific_meta_data(model_directory,
+                                                 language_data['description'],
+                                                 package_name)
+
+            except Exception:
+                line_break = "-" * 20
+                config_print = json.dumps(spacy_pipeline.config,
+                                          sort_keys=True, indent=4)
+                error_msg = (f"\n{line_break}\n"
+                             f"Error occurred for language code: {language_code}.\n\n"
+                             "Configuration file of the spaCy pipeline being "
+                             f"initialized: {config_print}")
+                print(error_msg)
+                raise
+
+
+if __name__ == '__main__':
+    app(prog_name="pymusas-models")

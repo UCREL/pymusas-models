@@ -22,7 +22,7 @@ For more detailed information on the rule based tagger go to the following [PyMU
 
 ## Model naming conventions
  
-We expect all model packages to follow the naming convention of `[lang]_[name]`, whereby `lang` is a [BCP 47 code] of the language, which is a similar convention as [spaCy uses](https://github.com/explosion/spacy-models#model-naming-conventions). The name is then split into:
+We expect all model packages to follow the naming convention of `[lang]_[name]`, whereby `lang` is a [BCP 47 code](https://www.w3.org/International/articles/language-tags/) of the language, which is a similar convention as [spaCy uses](https://github.com/explosion/spacy-models#model-naming-conventions). The name is then split into:
 
 * **rules** used:
     * `single`: Only a single word lexicon is used.
