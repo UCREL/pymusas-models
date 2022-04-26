@@ -59,11 +59,19 @@ jobs:
       - name: mypy
         run: mypy
 
-      - name: tests on Linux and Mac
-        if: ${{ runner.os == 'macOS' || runner.os == 'Linux' }}
+      - name: tests on Linux
+        if: ${{ runner.os == 'Linux' }}
         run: |
           make model-creation-tests
           make model-function-tests
+
+      - name: tests on Mac
+        if: ${{ runner.os == 'macOS' }}
+        run: |
+          pytest --virtual-env-directory=./temp_venv --overwrite ./model_creation_tests
+          source ./temp_venv/venv/bin/activate
+          pytest ./model_function_tests
+          deactivate
 
       - name: tests on Windows
         if: ${{ runner.os == 'Windows' }}
