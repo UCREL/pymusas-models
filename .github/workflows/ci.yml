@@ -65,4 +65,8 @@ jobs:
 
       - name: tests on Windows
         if: ${{ runner.os == 'Windows' }}
-        run: nmake -f makefile.win run-all-tests
+        run: |
+          pytest --virtual-env-directory=.\temp_venv --overwrite .\model_creation_tests
+          .\temp_venv\.env\bin\activate.ps1
+          pytest .\model_function_tests
+          deactivate
