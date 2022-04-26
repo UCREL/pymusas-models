@@ -66,6 +66,7 @@ jobs:
           ls -al
           ls -al ./temp_venv
           ls -al ./temp_venv/.env
+          ls -al ./temp_venv/.env/bin
           make model-function-tests
 
       - name: tests on Windows
@@ -75,6 +76,7 @@ jobs:
           dir .
           dir .\temp_venv
           dir .\temp_venv\.env
+          dir .\temp_venv\.env\bin
           .\temp_venv\.env\bin\activate.ps1
           pytest .\model_function_tests
           deactivate
