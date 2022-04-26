@@ -61,7 +61,11 @@ jobs:
 
       - name: tests on Linux and Mac
         if: ${{ runner.os == 'macOS' || runner.os == 'Linux' }}
-        run: make run-all-tests
+        run: |
+          ls -al
+          ls -al ./temp_venv
+          ls -al ./temp_venv/.env
+          make run-all-tests
 
       - name: tests on Windows
         if: ${{ runner.os == 'Windows' }}
