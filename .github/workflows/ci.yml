@@ -67,6 +67,7 @@ jobs:
         if: ${{ runner.os == 'Windows' }}
         run: |
           pytest --virtual-env-directory=.\temp_venv --overwrite .\model_creation_tests
+          dir .\temp_venv\.env
           .\temp_venv\.env\bin\activate.ps1
           pytest .\model_function_tests
           deactivate
