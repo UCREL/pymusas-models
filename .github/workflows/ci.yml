@@ -71,8 +71,8 @@ jobs:
           pytest --virtual-env-directory=.\temp_venv --overwrite .\model_creation_tests
           dir .
           dir .\temp_venv
-          dir .\temp_venv\temp_venv
-          dir .\temp_venv\temp_venv\bin
-          .\temp_venv\temp_venv\bin\activate.ps1
+          dir .\temp_venv\temp_venv\venv
+          dir .\temp_venv\temp_venv\venv\bin
+          .\temp_venv\temp_venv\venv\bin\activate.ps1
           pytest .\model_function_tests
           deactivate
