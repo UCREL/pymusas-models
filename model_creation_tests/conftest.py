@@ -66,7 +66,6 @@ def virtual_env_directory(request: SubRequest, overwrite: bool) -> Path:
     print(list(venv_directory.parent.iterdir()))
     print(list(venv_directory.iterdir()))
     print('done')
-    raise ValueError(venv_directory)
     return venv_directory
 
 
@@ -88,7 +87,10 @@ def session_virtualenv(virtual_env_directory: Path
         pip (`path.path`)           : Path to this virtualenv's pip executable
         .. also inherits all attributes from the `workspace` fixture
     """
+    print(list(virtual_env_directory.iterdir()))
     venv = VirtualEnv(workspace=virtual_env_directory, name='venv',
                       delete_workspace=False)
+    print(list(virtual_env_directory.iterdir()))
+    raise ValueError()
     yield venv
     venv.teardown()
