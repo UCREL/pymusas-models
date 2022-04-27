@@ -10,8 +10,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [3.7] #[3.7, 3.8, 3.9, '3.10']
-        os: [windows-latest] #[ubuntu-latest, macos-latest, windows-latest]
+        python-version: [3.7, 3.8, 3.9, '3.10']
+        os: [ubuntu-latest, macos-latest, windows-latest]
     
     steps:
       - uses: actions/checkout@v2
@@ -44,20 +44,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install --upgrade --upgrade-strategy eager -r requirements.txt -r dev_requirements.txt
 
-      #- name: isort
-      #  run: isort --check-only pymusas_models model_function_tests model_creation_tests
+      - name: isort
+        run: isort --check-only pymusas_models model_function_tests model_creation_tests
       
-      #- name: flake8
-      #  run: flake8
+      - name: flake8
+        run: flake8
 
-      #- name: Cache mypy
-      #  uses: actions/cache@v2
-      #  with:
-      #    path: ./.mypy_cache
-      #    key: ${{ runner.os }}-${{ env.pythonLocation }}
+      - name: Cache mypy
+        uses: actions/cache@v2
+        with:
+          path: ./.mypy_cache
+          key: ${{ runner.os }}-${{ env.pythonLocation }}
 
-      #- name: mypy
-      #  run: mypy
+      - name: mypy
+        run: mypy
 
       - name: tests on Linux
         if: ${{ runner.os == 'Linux' }}
@@ -76,9 +76,7 @@ jobs:
       - name: tests on Windows
         if: ${{ runner.os == 'Windows' }}
         run: |
-          pytest --virtual-env-directory=temp_venv .\model_creation_tests
-          dir .
-          dir .\temp_venv
+          pytest --virtual-env-directory=.\temp_venv --overwrite .\model_creation_tests
           .\temp_venv\venv\Scripts\Activate.ps1
           pytest .\model_function_tests
           deactivate
