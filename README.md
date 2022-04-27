@@ -60,7 +60,7 @@ These models are **not statistical** they are **rule based**, however they are s
 
 ## Development
 
-If you are contributing to this repository, please go to the [developer_readme.md](./developer_readme.md) file to learn more about how to contribute to this repository and in general learn more about this repository.
+If you are contributing to this repository, please go to the [CONTRIBUTING.md](./CONTRIBUTING.md) file to learn more about how to contribute to this repository and in general learn more about this repository.
 
 ## Acknowledgements
 
