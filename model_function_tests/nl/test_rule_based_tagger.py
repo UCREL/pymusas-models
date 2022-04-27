@@ -28,3 +28,4 @@ def test_single_UPOS_contextual() -> None:
     assert len(expected_output) == len(output)
     for token_index, token in enumerate(output):
         assert expected_output[token_index] == token._.pymusas_tags
+        assert [(token_index, token_index + 1)] == token._.pymusas_mwe_indexes
