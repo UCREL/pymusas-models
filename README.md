@@ -1,5 +1,11 @@
 # PyMUSAS-Models
 
+<p align="center">
+    <a href="https://github.com/UCREL/pymusas-models/actions/workflows/ci.yml">
+            <img alt="CI" src="https://github.com/UCREL/pymusas-models/actions/workflows/ci.yml/badge.svg?branch=main&event=push"/>
+    </a>
+</p>
+
 This repository contains all of the released [PyMUSAS](https://ucrel.github.io/pymusas/) models, and the following documentation:
 
 * **Model introduction**, this is useful context to better understand the model naming conventions.
