@@ -3,8 +3,8 @@ from spacy.tokens import Doc
 from spacy.vocab import Vocab
 
 
-TEST_TOKENS = ['Een', 'bank', 'of', 'een', 'kredietinstelling', 'is', 'een', 'financieel', 'instituut', '.']
-TEST_POS = ['DET', 'NOUN', 'CCONJ', 'DET', 'NOUN', 'AUX', 'DET', 'ADJ', 'NOUN', 'PUNCT']
+TEST_TOKENS = ['Een', 'bank', 'of', 'een', 'kredietinstelling', 'is', 'een', 'financieel', 'instituut', '.', '5']
+TEST_POS = ['DET', 'NOUN', 'CCONJ', 'DET', 'NOUN', 'AUX', 'DET', 'ADJ', 'NOUN', 'PUNCT', 'NUM']
 TEST_SPACES = [True] * len(TEST_TOKENS)
 
 
@@ -22,7 +22,8 @@ def test_single_UPOS_contextual() -> None:
         ['Z5'],
         ['I1'],
         ['P1/S5+c', 'X2.4/S5+c', 'S5+c', 'T2+'],
-        ['PUNCT']
+        ['PUNCT'],
+        ['N1']
     ]
 
     assert len(expected_output) == len(output)
