@@ -184,8 +184,8 @@ def create_pymusas_config(spacy_config: Dict[str, Any], single_lexicon_url: str,
         default_punctuation_tags = ["PUNCT"]
         default_number_tags = ["NUM"]
     elif model_pos_mapper == 'BasicCorCenCC':
-        single_lexicon_pos_mapper_registered_function = "pymusas.pos_mapper.UPOS_TO_USAS_COREv1"
-        mwe_lexicon_pos_mapper_registered_function = "pymusas.pos_mapper.USAS_CORE_TO_UPOSv1"
+        single_lexicon_pos_mapper_registered_function = "pymusas.pos_mapper.BASIC_CORCENCC_TO_USAS_COREv1"
+        mwe_lexicon_pos_mapper_registered_function = "pymusas.pos_mapper.USAS_CORE_TO_BASIC_CORCENCCv1"
         default_punctuation_tags = ["Atd"]
         default_number_tags = ["Rhi"]
     elif model_pos_mapper is not None:
