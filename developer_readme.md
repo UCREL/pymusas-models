@@ -50,6 +50,9 @@ This has resorted into two test folders, as shown in [General Folder Structure](
 
 As the `/model_function_tests` require the installed models that are created from `/model_creation_tests` the `/model_creation_tests` tests are ran first whereby the models created will be installed to a virtual environment that will be saved to `./temp_venv` **NOTE** `./temp_venv` is assumed to not exist, an error will occur if the directory does exist, unless you specify the `--overwrite` flag which will first delete the directory if it exists and then re-create.
 
+<details>
+    <summary>Linux/Mac</summary>
+
 ``` bash
 pytest --virtual-env-directory=./temp_venv ./model_creation_tests
 ```
@@ -60,23 +63,64 @@ Using the overwrite flag, which will first delete `./temp_venv` if it exists:
 pytest --virtual-env-directory=./temp_venv --overwrite ./model_creation_tests
 ```
 
-This command can be ran as a `make` command:
+This last command can be ran as a `make` command:
 
 ``` bash
 make model-creation-tests
 ```
 
+**Note Mac users** , I have found that `make` might not work if using the `make` command version that comes as default with your Mac (version 3.81), but the `make` command you can install through Conda (version 4.2.1) will work.
+
+</details>
+
+<details>
+    <summary>Windows</summary>
+
+``` powershell
+pytest --virtual-env-directory=.\temp_venv .\model_creation_tests
+```
+
+Using the overwrite flag, which will first delete `.\temp_venv` if it exists:
+
+``` powershell
+pytest --virtual-env-directory=.\temp_venv --overwrite .\model_creation_tests
+```
+
+</details>
+
 ### Model function tests
 
 By separating these tests into two different test folders it allows the virtual environment to be cached, which allows the second set of tests, `/model_function_tests`, to be ran as many times as you like without having to re-create the virtual environment.
 
+
+<details>
+    <summary>Linux/Mac</summary>
+
 ``` bash
-source ./temp_venv/.env/bin/activate # Used to activate the virtual environment
+source ./temp_venv/venv/bin/activate # Used to activate the virtual environment
 pytest ./model_function_tests
 deactivate
 ```
 
+</details>
+
+<details>
+    <summary>Windows</summary>
+
+``` powershell
+.\temp_venv\venv\Scripts\Activate.ps1 # Used to activate the virtual environment
+pytest .\model_function_tests
+deactivate
+```
+
+</details>
+
+
+
 ### All tests
+
+<details>
+    <summary>Linux/Mac</summary>
 
 There is a make command that will run all tests:
 
@@ -84,35 +128,23 @@ There is a make command that will run all tests:
 make run-all-tests
 ```
 
-### Caching models and virtual environment
+**Note Mac users** , I have found that `make` might not work if using the `make` command version that comes as default with your Mac (version 3.81), but the `make` command you can install through Conda (version 4.2.1) will work.
 
-This is a **two step process**:
+</details>
 
-1. To run the tests without creating the models and installing them each time we can cache both the models and the virtual environment that was used to install the models. Run the following replacing `MODELS_DIRECTORY` and `VIRTUAL_ENV_DIRECTORY` with a path to an empty directory:
+<details>
+    <summary>Windows</summary>
 
-``` bash
-pytest --model-cache-directory=MODELS_DIRECTORY --virtual-env-directory=VIRTUAL_ENV_DIRECTORY
+To run all tests:
+
+``` powershell
+pytest --virtual-env-directory=.\temp_venv --overwrite .\model_creation_tests
+.\temp_venv\venv\Scripts\Activate.ps1 # Used to activate the virtual environment
+pytest .\model_function_tests
+deactivate
 ```
 
-e.g.
-``` bash
-pytest --model-cache-directory=./models --virtual-env-directory=./temp_venv
-```
-
-2. Any future tests we can then run the following, which will not re-create or re-install the models and just use what we have cached:
-
-``` bash
-pytest --model-cache-directory=MODELS_DIRECTORY --virtual-env-directory=VIRTUAL_ENV_DIRECTORY --do-not-reinstall-packages
-```
-
-e.g.
-``` bash
-pytest --model-cache-directory=./models --virtual-env-directory=./temp_venv --do-not-reinstall-packages
-```
-
-**Note** if you want to test the model creation process you cannot use this caching process, but if you just want to test the models are working correctly or testing new tests for these models then this is great for those tests.
-
-
+</details>
 
 ## Model deployment lifecycle
 
