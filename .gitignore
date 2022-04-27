@@ -6,3 +6,4 @@ models
 build
 .pytest_cache
 temp_venv
+dist
