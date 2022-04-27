@@ -69,7 +69,7 @@ This last command can be ran as a `make` command:
 make model-creation-tests
 ```
 
-**Note Mac users** , I have found that `make` might not work if using the `make` command version that comes as default with your Mac (version 3.81), but the `make` command you can install through Conda (version 4.2.1) will work.
+**Note Mac users**, I have found that `make` might not work if using the `make` command version that comes as default with your Mac (version 3.81), but the `make` command you can install through Conda (version 4.2.1) will work.
 
 </details>
 
@@ -128,7 +128,7 @@ There is a make command that will run all tests:
 make run-all-tests
 ```
 
-**Note Mac users** , I have found that `make` might not work if using the `make` command version that comes as default with your Mac (version 3.81), but the `make` command you can install through Conda (version 4.2.1) will work.
+**Note Mac users**, I have found that `make` might not work if using the `make` command version that comes as default with your Mac (version 3.81), but the `make` command you can install through Conda (version 4.2.1) will work.
 
 </details>
 
