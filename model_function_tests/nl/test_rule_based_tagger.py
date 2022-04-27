@@ -9,7 +9,7 @@ TEST_SPACES = [True] * len(TEST_TOKENS)
 
 
 def test_single_UPOS_contextual() -> None:
-    dutch_model = spacy.load("nl_single_UPOS_contextual")
+    dutch_model = spacy.load("nl_single_upos2usas_contextual")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, pos=TEST_POS)
     output = dutch_model(doc)
     expected_output = [

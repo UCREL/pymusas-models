@@ -27,6 +27,11 @@ PYMUSAS_LANG_TO_SPACY = {
     'cy': 'xx',
     'id': 'id'
 }
+POS_MAPPER_TO_NAME = {
+    'UPOS': 'upos2usas',
+    'BasicCorCenCC': 'basiccorcencc2usas',
+    None: 'none'
+}
 app = typer.Typer()
 OPTION = typer.Option
 
@@ -327,7 +332,8 @@ def create_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'models')
                     spacy_pipeline.to_disk(temp_dir_path)
 
                     model_name = (f'{language_code}_{model_permutation}_'
-                                  f'{model_pos_mapper}_contextual')
+                                  f'{POS_MAPPER_TO_NAME[model_pos_mapper]}_'
+                                  'contextual')
                     model_version = pymusas.__version__
                     package_name = f'{model_name}-{model_version}'
                     

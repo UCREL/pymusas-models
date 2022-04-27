@@ -35,12 +35,12 @@ We expect all model packages to follow the naming convention of `[lang]_[name]`,
     * `dual`: Both a single and Multi Word Expression lexicons are used.
 * **POS Mapping** used to map the POS tagset from the tagged text to the POS tagset used in the lexicons of the rule based tagger.
     * `upos2usas`: Maps from [UPOS](https://universaldependencies.org/u/pos/) tagged text to USAS core tagset of the lexicons.
-    * `Bcorcencc2usas`: Maps [Basic CorCenCC](https://ucrel.github.io/pymusas/api/pos_mapper) tagged text to USAS core tagset of the lexicons.
-    * `None`: No POS mapper was used.
+    * `basiccorcencc2usas`: Maps [Basic CorCenCC](https://ucrel.github.io/pymusas/api/pos_mapper) tagged text to USAS core tagset of the lexicons.
+    * `none`: No POS mapper was used.
 * **ranker** the ranker used to determine the best lexicon entry match for the token.
     * `contextual`: Uses the `ContextualRuleBasedRanker`, which ranks based on heuristic rules and then finds the best lexicon match for each token taking into account all other tokens in the text. For more details on this ranker see the [ContextualRuleBasedRanker documentation]().
 
-For example, `cy_single_Bcorcencc2usas_contextual` is a Welsh single word lexicon model that maps the tagged text POS labels from Basic CorCenCC tagset to the USAS core tagset to be compatible with the lexicons used in this rule based tagger and uses the `contextual` ranker.
+For example, `cy_single_basiccorcencc2usas_contextual` is a Welsh single word lexicon model that maps the tagged text POS labels from Basic CorCenCC tagset to the USAS core tagset to be compatible with the lexicons used in this rule based tagger and uses the `contextual` ranker.
 
 ### Model versioning
 
