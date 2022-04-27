@@ -3,22 +3,25 @@ from spacy.tokens import Doc
 from spacy.vocab import Vocab
 
 
-TEST_TOKENS = ['Une', 'banque', 'est', 'une', 'institution', 'financière', '.']
-TEST_POS = ['DET', 'NOUN', 'AUX', 'DET', 'NOUN', 'ADJ', 'PUNCT']
+TEST_TOKENS = ['Een', 'bank', 'of', 'een', 'kredietinstelling', 'is', 'een', 'financieel', 'instituut', '.']
+TEST_POS = ['DET', 'NOUN', 'CCONJ', 'DET', 'NOUN', 'AUX', 'DET', 'ADJ', 'NOUN', 'PUNCT']
 TEST_SPACES = [True] * len(TEST_TOKENS)
 
 
 def test_single_UPOS_contextual() -> None:
-    french_model = spacy.load("fr_single_UPOS_contextual")
+    dutch_model = spacy.load("nl_single_UPOS_contextual")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, pos=TEST_POS)
-    output = french_model(doc)
+    output = dutch_model(doc)
     expected_output = [
         ['Z5'],
-        ['I1.1', 'X2.6+', 'M1', 'I1/H1', 'I1.1/I2.1c', 'W3/M4', 'A9+/H1', 'O2', 'M6'],
-        ['M6'],
-        ['Z5'],
-        ['S5+c', 'S7.1+', 'H1c', 'S1.1.1', 'T2+'],
         ['Z99'],
+        ['Z5'],
+        ['Z5'],
+        ['Z99'],
+        ['Z99'],
+        ['Z5'],
+        ['I1'],
+        ['P1/S5+c', 'X2.4/S5+c', 'S5+c', 'T2+'],
         ['PUNCT']
     ]
 
