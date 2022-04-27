@@ -273,8 +273,6 @@ def create_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'models')
     assert meta_data, f'The {language_resource_file} is empty.'
 
     for language_code, data in meta_data.items():
-        if language_code == 'nl':
-            continue
         resources: List[Dict[str, str]] = data['resources']
         single_lexicon_url = ''
         mwe_lexicon_url = ''
