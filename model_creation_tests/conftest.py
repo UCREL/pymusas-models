@@ -11,10 +11,6 @@ from pytest_fixture_config import Config, yield_requires_config
 from pytest_virtualenv import VirtualEnv
 
 
-import logging
-import sys
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-
 class FixtureConfig(Config):
     __slots__ = ('virtualenv_executable')
 
@@ -63,13 +59,7 @@ def virtual_env_directory(request: SubRequest, overwrite: bool) -> Path:
     elif venv_directory.exists():
         raise FileExistsError("Expecting the virtual environment directory to"
                               f" be empty: {venv_directory}")
-    venv_directory = venv_directory.resolve()
-    venv_directory.mkdir()
-    print(venv_directory.cwd())
-    print(venv_directory.parent)
-    print(list(venv_directory.parent.iterdir()))
-    print(list(venv_directory.iterdir()))
-    print('done')
+    venv_directory.mkdir(parents=True)
     return venv_directory
 
 
@@ -91,13 +81,9 @@ def session_virtualenv(virtual_env_directory: Path
         pip (`path.path`)           : Path to this virtualenv's pip executable
         .. also inherits all attributes from the `workspace` fixture
     """
-    print(list(virtual_env_directory.iterdir()))
-    if virtual_env_directory is None:
-        print('Massive problem')
-        raise ValueError('Is empty')
-    venv = VirtualEnv(workspace=str(virtual_env_directory.resolve(strict=True)), name='venv',
+    virtual_env_directory_str = str(virtual_env_directory.resolve(strict=True))
+    venv = VirtualEnv(workspace=virtual_env_directory_str,
+                      name='venv',
                       delete_workspace=False)
-    print(list(virtual_env_directory.iterdir()))
-    raise ValueError()
     yield venv
     venv.teardown()
