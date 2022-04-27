@@ -16,7 +16,7 @@ pip install -e .\[tests\]
 
 ### Running linters
 
-This code base uses flake8 and mypy to ensure that the format of the code is consistent and contain type hints. The flake8 settings can be found in [.flake8](./.flake8) and the mypy settings within [pyproject.toml](./pyproject.toml). To run these linters:
+This code base uses flake8 and mypy to ensure that the format of the code is consistent and contain type hints. The flake8 settings can be found in [setup.cfg](./setup.cfg) and the mypy settings within [pyproject.toml](./pyproject.toml). To run these linters:
 
 ``` bash
 isort pymusas_models model_function_tests model_creation_tests
@@ -38,13 +38,36 @@ mypy
 
 The testing structure of `/model_function_tests` has been heavily influenced by how [spaCy tests their models](https://github.com/explosion/spacy-models/tree/master/tests#writing-tests).
 
+
+## Model deployment lifecycle
+
+Each model is created using a spaCy [configuration](https://spacy.io/api/data-formats#config) and [meta](https://spacy.io/api/data-formats#meta) file, of which we can have more than one model for each language. These configuration and meta files are automatically created using the Command Line Interface (CLI) to `pymusas_models` and then used to create the PyMUSAS spaCy models with their relevant installation data (distribution files, README, meta data, etc). This process is done per model and all model data is stored in their own model folder, named based off the [model naming convention](./README.md#model-naming-conventions) specified in the main README, within the directory you have specified to store this data in. Each of these spaCy model folders contain the relevant information to create a [GitHub release](https://github.com/UCREL/pymusas-models/releases) for that model.
+
+The CLI knows which models to create and how to create them by utilising the given meta data stored in the [language_resources.json](./language_resources.json) file (for more information of the [language_resources.json](./language_resources.json) file see the [Language Resource Meta Data section](#language-resource-meta-data)).
+
+To create all of the models and store them in the folder `./models` run the following:
+
+``` bash
+python pymusas_models/__main__.py ./models ./language_resources.json
+```
+
+This will create the following folders:
+
+* `./models/cmn_dual_upos2usas_contextual-0.3.0`
+* `./models/cmn_single_upos2usas_contextual-0.3.0`
+* `./models/cy_dual_basiccorcencc2usas_contextual-0.3.0`
+* other model folders
+
+After the models have been created you will have to manually create a [GitHub release](https://github.com/UCREL/pymusas-models/releases) per model.
+
+
 ## Running tests
 
 As the tests are both: 
 * Testing that the models can be created and installed via `pip` locally.
 * Once created and installed the models function as expected. 
 
-This has resorted into two test folders, as shown in [General Folder Structure](#general-folder-structure), `/model_function_tests` and `/model_creation_tests`. The `/model_creation_tests` tests the first bullet point and `/model_function_tests` tests the second bullet point.
+This has resulted in two test folders, as shown in [General Folder Structure](#general-folder-structure), `/model_function_tests` and `/model_creation_tests`. The `/model_creation_tests` tests the first bullet point and `/model_function_tests` tests the second bullet point.
 
 ### Model creation tests
 
@@ -146,19 +169,10 @@ deactivate
 
 </details>
 
-## Model deployment lifecycle
-
-Each model is created using a spaCy [configuration](https://spacy.io/api/data-formats#config) and [meta](https://spacy.io/api/data-formats#meta) file, of which we can have more than one model for each language. These configuration and meta files are automatically created and stored for each model within their own model folder, which is named after the model using the model naming conventions specified in the main [README](./README.md#model-naming-conventions). These model folders are then stored within their relevant language folder, e.g. if it is Welsh model then it would be in the [./languages/cy/ folder.](./languages/cy/) Once the configuration and meta files are created the associated spaCy model is created and then uploaded to this repository as a [GitHub release](https://github.com/UCREL/pymusas-models/releases).
-
-Below is a list of steps outlining the scripts that need to be ran to create these models with some extra detail on what each script does:
-
-1. [scripts/create_config_and_meta_files.py](./scripts/create_config_and_meta_files.py). This script creates the configuration and meta files for each model using the model meta data we store on each language, within the [language_resources.json](./language_resources.json) file (for more information of the [language_resources.json](./language_resources.json) file see the [Language Resource Meta Data section](#language-resource-meta-data)).
-2. 
-
 
 ## Language Resource Meta Data
 
-Language resource meta data is stored in the [language_resources.json file](./language_resources.json), it is used by the [scripts/create_config_and_meta_files.py](./scripts/create_config_and_meta_files.py) script to create the models and their associated meta data file. The structure of the JSON file is the following:
+Language resource meta data is stored in the [language_resources.json file](./language_resources.json), it is used by the entry points to the main package, `pymusas_models`, to create the models. The structure of the JSON file is the following:
 
 ``` JSON
 {
