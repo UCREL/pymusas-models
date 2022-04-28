@@ -58,7 +58,14 @@ This will create the following folders:
 * `./models/cy_dual_basiccorcencc2usas_contextual-0.3.0`
 * other model folders
 
-After the models have been created you will have to manually create a [GitHub release](https://github.com/UCREL/pymusas-models/releases) per model.
+After the models have been created you will have to manually create a [GitHub release](https://github.com/UCREL/pymusas-models/releases) per model. In doing this per model:
+
+1. The tag of the release should be the model name, e.g. `cmn_dual_upos2usas_contextual-0.3.0`
+2. The branch, select the `main` branch (this is the default branch).
+3. The title same as the tag e.g. `cmn_dual_upos2usas_contextual-0.3.0`
+4. The description should be the README of the model.
+5. Attach both the `.tar.gz` and `.whl` files from the model's `dist` folder.
+6. Click `Publish release`
 
 
 ## Creating the overview of the models table
