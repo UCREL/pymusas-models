@@ -4,7 +4,7 @@ import json
 import math
 from pathlib import Path
 import tempfile
-from typing import Any, Dict, List, Optional, Tuple, cast
+from typing import Any, Dict, List, Optional, Tuple
 
 import pymusas
 from pymusas.spacy_api import lexicon_collection, pos_mapper, rankers  # noqa: F401
