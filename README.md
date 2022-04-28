@@ -68,6 +68,8 @@ Similar to the the spaCy models, our model versioning reflects the compatibility
 | Portuguese (pt) | pt_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 0.27MB |
 | Portuguese (pt) | pt_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.25MB |
 
+* MWE -- :heavy_check_mark: means that the model supports identification and tagging of Multi Word Expressions.
+
 ## Issues / bug reports / improving the models
 
 These models are **not statistical** they are **rule based**, however they are still error prone as not all rules will cover every situation and in some cases this is not possible. If you are finding a lot of mis-classified tokens please do file a report on the [PyMUSAS issue tracker](https://github.com/UCREL/pymusas/issues) so that we can try to improve the model. Thank you in advance for your support.
