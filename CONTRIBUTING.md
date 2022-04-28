@@ -48,7 +48,7 @@ The CLI knows which models to create and how to create them by utilising the giv
 To create all of the models and store them in the folder `./models` run the following:
 
 ``` bash
-python pymusas_models/__main__.py ./models ./language_resources.json
+python pymusas_models/__main__.py create-models --models-directory ./models --language-resource-file ./language_resources.json
 ```
 
 This will create the following folders:
@@ -59,6 +59,20 @@ This will create the following folders:
 * other model folders
 
 After the models have been created you will have to manually create a [GitHub release](https://github.com/UCREL/pymusas-models/releases) per model.
+
+
+## Creating the overview of the models table
+
+To create the [overview of the models table from the main README](./README.md#overview-of-the-models):
+
+1. If you have not already done so create all of the models (if you have done this please skip this step):
+``` bash
+python pymusas_models/__main__.py create-models --models-directory ./models --language-resource-file ./language_resources.json
+```
+2. Run the following which will print out the Markdown overview of the models table, which can then be copied into the main README:
+``` bash
+python pymusas_models/__main__.py overview-of-models --models-directory ./models
+``` 
 
 
 ## Running tests

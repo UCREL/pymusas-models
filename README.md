@@ -52,7 +52,21 @@ Similar to the the spaCy models, our model versioning reflects the compatibility
 
 ## Overview of the models
 
-Table to be added here.
+| Language (BCP 47 language code) | Model Name | MWE | POS Mapper | Ranker | File Size |
+| --- | --- | --- | --- | --- | --- |
+| Mandarin Chinese (cmn) | cmn_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 1.28MB |
+| Mandarin Chinese (cmn) | cmn_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 1.00MB |
+| Welsh (cy) | cy_dual_basiccorcencc2usas_contextual | :heavy_check_mark: | Basic CorCenCC 2 USAS | Contextual | 1.09MB |
+| Welsh (cy) | cy_single_basiccorcencc2usas_contextual | :x: | Basic CorCenCC 2 USAS | Contextual | 1.09MB |
+| Spanish, Castilian (es) | es_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 0.20MB |
+| Spanish, Castilian (es) | es_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.16MB |
+| French (fr) | fr_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.08MB |
+| Indonesian (id) | id_single_none_contextual | :x: | None | Contextual | 0.24MB |
+| Italian (it) | it_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 0.50MB |
+| Italian (it) | it_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.42MB |
+| Dutch, Flemish (nl) | nl_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.15MB |
+| Portuguese (pt) | pt_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 0.27MB |
+| Portuguese (pt) | pt_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.25MB |
 
 ## Issues / bug reports / improving the models
 

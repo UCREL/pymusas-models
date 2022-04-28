@@ -19,7 +19,9 @@ def test_create_and_install_models(tmp_path: Path,
 
     language_resource_file = Path(repo_directory, 'language_resources.json')
     runner = CliRunner()
-    command_line_arguments = ["--models-directory", str(tmp_path),
+    command_line_arguments = ["create-models",
+                              "--models-directory",
+                              str(tmp_path),
                               "--language-resource-file",
                               str(language_resource_file)]
     runner_result = runner.invoke(app, command_line_arguments)

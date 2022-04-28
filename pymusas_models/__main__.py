@@ -4,7 +4,7 @@ import json
 import math
 from pathlib import Path
 import tempfile
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, cast
 
 import pymusas
 from pymusas.spacy_api import lexicon_collection, pos_mapper, rankers  # noqa: F401
@@ -12,6 +12,7 @@ from pymusas.spacy_api.taggers import rule_based, rules  # noqa: F401
 import spacy
 import srsly
 import typer
+from wasabi import MarkdownRenderer
 
 from pymusas_models.package import generate_readme, package
 
@@ -124,6 +125,7 @@ def add_model_specific_meta_data(model_directory: Path, language_name: str,
 
     model_size_mb = f'{float(max_model_size) / math.pow(2, 20):.2f}MB'
     model_meta_data["size"] = model_size_mb
+    model_meta_data["full_language_name"] = language_name
     srsly.write_json(model_meta_file, model_meta_data)
 
     assert len(dist_file_names) == 2
@@ -358,6 +360,67 @@ def create_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'models')
                              f"initialized: {config_print}")
                 print(error_msg)
                 raise
+
+
+EXISTING_MODEL_DIRECTORY_HELP = '''
+A path to a directory that is storing the PyMUSAS models.
+'''
+
+
+@app.command("overview-of-models")
+def overview_of_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'models'),
+                                                       help=EXISTING_MODEL_DIRECTORY_HELP,
+                                                       exists=True, file_okay=False,
+                                                       dir_okay=True, resolve_path=True)) -> None:
+    '''
+    Prints to stdout a Markdown table whereby each row is a PyMUSAS model that
+    is a avaliable/released. Every row contains the following information
+    about the relevant PyMUSAS model:
+
+    1. Language (BCP 47 language code)
+    2. Model name.
+    3. MWE
+    4. POS Mapper
+    5. Ranker
+    6. File Size
+    '''
+    md = MarkdownRenderer()
+    headers = ["Language (BCP 47 language code)", "Model Name",
+               "MWE", "POS Mapper", "Ranker", "File Size"]
+    table_data: List[List[str]] = []
+
+    models_directories = sorted(models_directory.iterdir(),
+                                key=lambda x: (x.name.split('_')[0],
+                                               x.name.split('_')[1]))
+
+    for model_direcotry in models_directories:
+        meta_data_file = Path(model_direcotry, 'meta.json')
+        model_meta_data = srsly.read_json(meta_data_file)
+        
+        model_name = model_meta_data["name"]
+        
+        language_name = model_meta_data["full_language_name"]
+        bcp_47_code = model_name.split("_")[0]
+        language_code = f'{language_name} ({bcp_47_code})'
+        
+        mwe = ':x:'
+        if 'dual' in model_name:
+            mwe = ':heavy_check_mark:'
+        
+        model_pos_mapper = 'None'
+        if 'upos2usas' in model_name:
+            model_pos_mapper = 'UPOS 2 USAS'
+        elif 'basiccorcencc2usas' in model_name:
+            model_pos_mapper = 'Basic CorCenCC 2 USAS'
+        
+        ranker = model_name.split('_')[-1].capitalize()
+        file_size = model_meta_data['size']
+
+        table_data.append([language_code, model_name, mwe,
+                           model_pos_mapper, ranker, file_size])
+
+    md.add(md.table(table_data, headers))
+    print(md.text)
 
 
 if __name__ == '__main__':
