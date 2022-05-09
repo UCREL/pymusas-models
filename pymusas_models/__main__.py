@@ -59,8 +59,7 @@ def create_description(language_name: str, package_name: str,
     dist_shield_0 = create_dist_download_shield(dist_file_names[0])
     dist_shield_1 = create_dist_download_shield(dist_file_names[1])
     
-    description = (f'# {package_name}\n'
-                   f'<p>\n{dist_shield_0}\n{dist_shield_1}\n</p>\n\n'
+    description = (f'<p>\n{dist_shield_0}\n{dist_shield_1}\n</p>\n\n'
                    f'> **Checksum (SHA256) .tar.gz:** `{tar_gz_checksum}`\n\n'
                    f'> **Checksum (SHA256) .whl:** `{wheel_checksum}`\n\n'
                    f'{language_name} USAS semantic tagger')
@@ -256,6 +255,14 @@ under section `Language Resource Meta Data` for details
 on how the meta data should be structured. This meta data file specifies
 what PyMUSAS models should be created based on the meta data contents.
 '''
+MODEL_VERSION_HELP = '''
+The value of the model version. This is the `c` element as described in
+`Model versioning` within the main README. The `a` and `b` element come from
+the PyMUSAS version used.
+'''
+SPACY_VERSION_HELP = '''
+The spaCy version that the model is compitable with, e.g. `>=3.0.0`.
+'''
 
 
 @app.command("create-models")
@@ -267,7 +274,9 @@ def create_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'models')
                                                         help=LANGUAGE_RESOURCE_FILE_HELP,
                                                         exists=True, file_okay=True,
                                                         dir_okay=False, writable=False,
-                                                        readable=True, resolve_path=True)
+                                                        readable=True, resolve_path=True),
+                  model_version: str = OPTION('0', help=MODEL_VERSION_HELP),
+                  spacy_version: str = OPTION('>=3.0', help=SPACY_VERSION_HELP)
                   ) -> None:
     '''
     Creates all of the PyMUSAS models, based on the meta data within the
@@ -329,6 +338,8 @@ def create_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'models')
             try:
                 spacy_pipeline.initialize()
                 add_default_meta_data(spacy_pipeline.meta)
+                spacy_pipeline.meta['spacy_version'] = spacy_version
+                
                 with tempfile.TemporaryDirectory() as temp_dir:
                     temp_dir_path = Path(temp_dir)
                     spacy_pipeline.to_disk(temp_dir_path)
@@ -336,15 +347,17 @@ def create_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'models')
                     model_name = (f'{language_code}_{model_permutation}_'
                                   f'{POS_MAPPER_TO_NAME[model_pos_mapper]}_'
                                   'contextual')
-                    model_version = pymusas.__version__
-                    package_name = f'{model_name}-{model_version}'
+                    full_model_version_list = pymusas.__version__.split('.')[:2]
+                    full_model_version_list.append(model_version)
+                    full_model_version = '.'.join(full_model_version_list)
+                    package_name = f'{model_name}-{full_model_version}'
                     
                     # Create model
                     models_directory.mkdir(parents=True, exist_ok=True)
                     package(temp_dir_path, models_directory,
                             create_sdist=True,
                             create_wheel=True, name=model_name,
-                            version=model_version)
+                            version=full_model_version)
                     model_directory = Path(models_directory, f'{package_name}')
                     add_model_specific_meta_data(model_directory,
                                                  language_data['description'],

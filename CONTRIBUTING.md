@@ -67,6 +67,30 @@ After the models have been created you will have to manually create a [GitHub re
 5. Attach both the `.tar.gz` and `.whl` files from the model's `dist` folder.
 6. Click `Publish release`
 
+### Advance model deployment options
+
+If you want to specify the version of model, e.g. the `c` part of model version as described in [the model versioning section within the main README](./README.md#model-versioning) use the `--model-version` command line option (**default value "0"**).
+
+In addition to specify the version of `spaCy` that the model will be compatible with use the `--spacy-version` command line option (**default value ">=3.0"**).
+
+Below we show how both of these command line options can be used:
+
+``` bash
+python pymusas_models/__main__.py create-models \
+--models-directory ./models \
+--language-resource-file ./language_resources.json \
+--model-version 1 \
+--spacy-version ">=3.0"
+```
+
+This will create the following folders, assuming we are using PyMUSAS version `0.3.0`:
+
+* `./models/cmn_dual_upos2usas_contextual-0.3.1`
+* `./models/cmn_single_upos2usas_contextual-0.3.1`
+* `./models/cy_dual_basiccorcencc2usas_contextual-0.3.1`
+* other model folders
+
+Of which all of these models will enforce a spaCy version `>=3.0`.
 
 ## Creating the overview of the models table
 
