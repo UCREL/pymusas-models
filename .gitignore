@@ -7,3 +7,4 @@ build
 .pytest_cache
 temp_venv
 dist
+GITHUB_TOKEN.json
