@@ -20,11 +20,11 @@ All of the models are released through [GitHub releases](https://github.com/UCRE
 
 All of the models are rule based taggers, and all output [USAS semantic categories](https://ucrel.lancs.ac.uk/usas/) on the token level. The rules rely on lexicon and lexical information to classify a token into semantic categories. The lexicon information comes from a lexicon, of which the lexicons used in these models all come from the [Multilingual USAS GitHub repository](https://github.com/UCREL/Multilingual-USAS). The lexical information used is the `text`, `lemma`, and `Part Of Speech (POS)` of the token, this information is then used to find the correct lexicon entry in the given lexicon(s). **Note** that not all lexical information is required, but the more information the more likely you will have a more accurate tagger.
 
-If the model uses a Multi Word Expression (MWE) lexicon then the tagger can identify MWEs and their associated semantic categories. Furthermore, these lexicons can be more than just lookup tables they can contain a pattern matching syntax, of which more details of this can be found in these [notes](). In addition, the POS tagset used in these lexicons can differ from the tagset within the lexical information therefore POS mappers are used to map from the lexical POS tagset (lexical POS tagset is most likely determined by the POS tagger used on the text) to the lexicon POS tagset.
+If the model uses a Multi Word Expression (MWE) lexicon then the tagger can identify MWEs and their associated semantic categories. Furthermore, these lexicons can be more than just lookup tables they can contain a pattern matching syntax, of which more details of this can be found in these [notes](https://ucrel.github.io/pymusas/usage/notes/mwe_syntax). In addition, the POS tagset used in these lexicons can differ from the tagset within the lexical information therefore POS mappers are used to map from the lexical POS tagset (lexical POS tagset is most likely determined by the POS tagger used on the text) to the lexicon POS tagset.
 
 As a token or tokens, in MWE cases, can be matched to multiple lexicon entries the rule based tagger uses a ranking system to determine the best token match.
 
-For more detailed information on the rule based tagger go to the following [PyMUSAS API documentation page]().
+For more detailed information on the rule based tagger go to the following [PyMUSAS API documentation page](https://ucrel.github.io/pymusas/api/spacy_api/taggers/rule_based).
 
 ## Model naming conventions
  
@@ -38,7 +38,7 @@ We expect all model packages to follow the naming convention of `[lang]_[name]`,
     * `basiccorcencc2usas`: Maps [Basic CorCenCC](https://ucrel.github.io/pymusas/api/pos_mapper) tagged text to USAS core tagset of the lexicons.
     * `none`: No POS mapper was used.
 * **ranker** the ranker used to determine the best lexicon entry match for the token.
-    * `contextual`: Uses the `ContextualRuleBasedRanker`, which ranks based on heuristic rules and then finds the best lexicon match for each token taking into account all other tokens in the text. For more details on this ranker see the [ContextualRuleBasedRanker documentation]().
+    * `contextual`: Uses the `ContextualRuleBasedRanker`, which ranks based on heuristic rules and then finds the best lexicon match for each token taking into account all other tokens in the text. For more details on this ranker see the [ContextualRuleBasedRanker documentation](https://ucrel.github.io/pymusas/api/rankers/lexicon_entry#contextualrulebasedranker).
 
 For example, `cy_single_basiccorcencc2usas_contextual` is a Welsh single word lexicon model that maps the tagged text POS labels from Basic CorCenCC tagset to the USAS core tagset to be compatible with the lexicons used in this rule based tagger and uses the `contextual` ranker.
 
