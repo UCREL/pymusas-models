@@ -19,7 +19,7 @@ pip install -e .\[tests\]
 This code base uses flake8 and mypy to ensure that the format of the code is consistent and contain type hints. The flake8 settings can be found in [setup.cfg](./setup.cfg) and the mypy settings within [pyproject.toml](./pyproject.toml). To run these linters:
 
 ``` bash
-isort pymusas_models model_function_tests model_creation_tests
+isort pymusas_models model_function_tests model_creation_tests model_release.py
 flake8
 mypy
 ```
@@ -27,6 +27,7 @@ mypy
 ## General folder structure
 
 * `/pymusas_models` - contains the code that creates all of the PyMUSAS models.
+* `/model_release.py` - Releases the models, that have been created locally, to GitHub as a [GitHub release](https://github.com/UCREL/pymusas-models/releases) per model. 
 * `/model_creation_tests`
 * `/model_function_tests` - The tests are divided up by language, using each language's [BCP 47 language code](https://www.w3.org/International/articles/language-tags/), and then model (currently we only have one model the `rule based tagger`).
     * `/model_function_tests/fr`
@@ -58,15 +59,63 @@ This will create the following folders:
 * `./models/cy_dual_basiccorcencc2usas_contextual-0.3.0`
 * other model folders
 
-After the models have been created you will have to manually create a [GitHub release](https://github.com/UCREL/pymusas-models/releases) per model. In doing this per model:
+### Releasing the models to GitHub
 
-1. The tag of the release should be the model name, e.g. `cmn_dual_upos2usas_contextual-0.3.0`
-2. The branch, select the `main` branch (this is the default branch).
-3. The title same as the tag e.g. `cmn_dual_upos2usas_contextual-0.3.0`
-4. The description should be the README of the model.
-5. Attach both the `.tar.gz` and `.whl` files from the model's `dist` folder.
-6. Click `Publish release`
+To automate the release of the models we have created we are going to use the [GitHub REST API](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api). This REST API has a rate limit of 5000 calls per hour when you are running it as an authenticated client, for [details on authentication](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api#authentication). As we are creating releases we need to have a Personal Access Token (PAT) for authentication with `public_repo` scope, the PAT can be created at the following [link](https://github.com/settings/tokens/new), we named our PAT `pymusas-models`.
 
+Once you have created your PAT add it to the following file `GITHUB_TOKEN.json` **this file should never be added to the repository as it will contain your PAT which is sensitive information.** The PAT should be added to the JSON file like so:
+
+``` json
+{"PAT": "YOUR PAT TOKEN"}
+```
+
+Now, assuming all of the models you would like to release are in the `./models` directory, we can release the model to GitHub using the [model_release.py](./model_release.py) script like so:
+
+``` bash
+python model_release.py
+```
+
+Once ran successfully it will state the rate limit you had and have left on the GitHub REST API, like below:
+
+``` bash
+```
+
+In addition you should see the models you wanted to release to GitHub now on GitHub within the [releases section](https://github.com/UCREL/pymusas-models/releases).
+
+#### Potential Errors
+
+Some errors that can occur when running the [model_release.py](./model_release.py) script:
+
+* The model you want to release has already been released. If this occurs and is a mistake then delete the model from the `./models` folder. If this is not a mistake then you may need to change the model version of the model (`c` element as described in the [`Model Versioning` section from the main README](./README.md#model-versioning)) as each model that is released has to have a unique model name.
+* The model did not upload correctly.
+
+Once you have corrected the error re-run the [model_release.py](./model_release.py) script.
+
+
+### Advance model deployment options
+
+If you want to specify the version of model, e.g. the `c` part of model version as described in [the model versioning section within the main README](./README.md#model-versioning) use the `--model-version` command line option (**default value "0"**).
+
+In addition to specify the version of `spaCy` that the model will be compatible with use the `--spacy-version` command line option (**default value ">=3.0"**). This spaCy version is overridden per language if the language resource file for a given language specifies a `spacy version`. See `python pymusas_models/__main__.py create-models --help` for more details.
+
+Below we show how both of these command line options can be used:
+
+``` bash
+python pymusas_models/__main__.py create-models \
+--models-directory ./models \
+--language-resource-file ./language_resources.json \
+--model-version 1 \
+--spacy-version ">=3.0"
+```
+
+This will create the following folders, assuming we are using PyMUSAS version `0.3.0`:
+
+* `./models/cmn_dual_upos2usas_contextual-0.3.1`
+* `./models/cmn_single_upos2usas_contextual-0.3.1`
+* `./models/cy_dual_basiccorcencc2usas_contextual-0.3.1`
+* other model folders
+
+Of which all of these models will enforce a spaCy version `>=3.0`.
 
 ## Creating the overview of the models table
 
@@ -209,7 +258,8 @@ Language resource meta data is stored in the [language_resources.json file](./la
             }
         ],
         "model information": {
-            "POS mapper": "POS TAGSET"
+            "POS mapper": "POS TAGSET",
+            "spacy version": "VERSION OF SPACY"
         },
         "language data": {
             "description": "LANANGUAGE NAME",
@@ -246,6 +296,7 @@ Language resource meta data is stored in the [language_resources.json file](./la
     * `url` - permanent URL link to the associated resource.
   * `model information` - this is data that helps to create the model given the resources and the assumed NLP models, e.g. POS tagger, that will be used with the PyMUSAS model.
     * `POS mapper` - A mapper from that maps from the POS tagset of the tagged text to the POS tagset used in the lexicons. The mappers used are those from within the [PyMUSAS mappers module.](https://ucrel.github.io/pymusas/api/pos_mapper) We currently assume that each resource associated with the model uses the same POS tagset in the lexicon, this is a limitation of this model creation framework rather than the PyMUSAS package itself.
+    * `spacy version` - **Optional** this key is only required if the version of spaCy required has to be more specific than the version specified by [PyMUSAS](https://github.com/UCREL/pymusas). The version of spaCy required, this should be a String and follow the standard Python pip install syntax of `spaCy` followed by a [version specifier](https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifiers), e.g. `spacy>=3.3`.
   * `language data` - this is data that is associated with the `BCP 47` language code. To some degree this is redundant as we can look this data up through the `BCP 47` code, however we thought it is better to have it in the meta data for easy lookup. All of this data can be easily found through looking up the `BCP 47` language code in the [BCP47 language subtag lookup tool](https://r12a.github.io/app-subtags/)
     * `description` - The `description` of the language code.
     * `macrolanguage` - The macrolanguage tag, **note** if this does not exist then give the [primary language tag](https://www.w3.org/International/articles/language-tags/#language), which could be the same as the whole `BCP 47` code. The `macrolanguage` tag could be useful in future for grouping languages.

@@ -1,2 +1,2 @@
-pymusas @ git+https://github.com/UCREL/pymusas.git@mwe#egg=pymusas
+pymusas==0.3.0
 wheel
