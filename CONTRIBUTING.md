@@ -96,7 +96,7 @@ Once you have corrected the error re-run the [model_release.py](./model_release.
 
 If you want to specify the version of model, e.g. the `c` part of model version as described in [the model versioning section within the main README](./README.md#model-versioning) use the `--model-version` command line option (**default value "0"**).
 
-In addition to specify the version of `spaCy` that the model will be compatible with use the `--spacy-version` command line option (**default value ">=3.0"**).
+In addition to specify the version of `spaCy` that the model will be compatible with use the `--spacy-version` command line option (**default value ">=3.0"**). This spaCy version is overridden per language if the language resource file for a given language specifies a `spacy version`. See `python pymusas_models/__main__.py create-models --help` for more details.
 
 Below we show how both of these command line options can be used:
 
@@ -258,7 +258,8 @@ Language resource meta data is stored in the [language_resources.json file](./la
             }
         ],
         "model information": {
-            "POS mapper": "POS TAGSET"
+            "POS mapper": "POS TAGSET",
+            "spacy version": "VERSION OF SPACY"
         },
         "language data": {
             "description": "LANANGUAGE NAME",
@@ -295,6 +296,7 @@ Language resource meta data is stored in the [language_resources.json file](./la
     * `url` - permanent URL link to the associated resource.
   * `model information` - this is data that helps to create the model given the resources and the assumed NLP models, e.g. POS tagger, that will be used with the PyMUSAS model.
     * `POS mapper` - A mapper from that maps from the POS tagset of the tagged text to the POS tagset used in the lexicons. The mappers used are those from within the [PyMUSAS mappers module.](https://ucrel.github.io/pymusas/api/pos_mapper) We currently assume that each resource associated with the model uses the same POS tagset in the lexicon, this is a limitation of this model creation framework rather than the PyMUSAS package itself.
+    * `spacy version` - **Optional** this key is only required if the version of spaCy required has to be more specific than the version specified by [PyMUSAS](https://github.com/UCREL/pymusas). The version of spaCy required, this should be a String and follow the standard Python pip install syntax of `spaCy` followed by a [version specifier](https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifiers), e.g. `spacy>=3.3`.
   * `language data` - this is data that is associated with the `BCP 47` language code. To some degree this is redundant as we can look this data up through the `BCP 47` code, however we thought it is better to have it in the meta data for easy lookup. All of this data can be easily found through looking up the `BCP 47` language code in the [BCP47 language subtag lookup tool](https://r12a.github.io/app-subtags/)
     * `description` - The `description` of the language code.
     * `macrolanguage` - The macrolanguage tag, **note** if this does not exist then give the [primary language tag](https://www.w3.org/International/articles/language-tags/#language), which could be the same as the whole `BCP 47` code. The `macrolanguage` tag could be useful in future for grouping languages.

@@ -261,7 +261,9 @@ The value of the model version. This is the `c` element as described in
 the PyMUSAS version used.
 '''
 SPACY_VERSION_HELP = '''
-The spaCy version that the model is compitable with, e.g. `>=3.0.0`.
+The spaCy version that the model is compitable with, e.g. `>=3.0.0`. This can
+be overridden by the spacy version that is specified in the
+`language_resource_file` for each given language.
 '''
 
 
@@ -338,7 +340,13 @@ def create_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'models')
             try:
                 spacy_pipeline.initialize()
                 add_default_meta_data(spacy_pipeline.meta)
-                spacy_pipeline.meta['spacy_version'] = spacy_version
+                
+                model_spacy_version = model_information.get('spacy version',
+                                                            None)
+                if model_spacy_version is not None:
+                    spacy_pipeline.meta['spacy_version'] = model_spacy_version
+                else:
+                    spacy_pipeline.meta['spacy_version'] = spacy_version
                 
                 with tempfile.TemporaryDirectory() as temp_dir:
                     temp_dir_path = Path(temp_dir)
