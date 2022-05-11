@@ -68,8 +68,8 @@ for release_page in release_pages:
                 allowed_asset_names.remove(asset.name)
         assert not allowed_asset_names
 
-        if tag_name in tag_names_uploaded_set:
-            tag_names_uploaded_set.remove(tag_name)
+        if release.tag_name in tag_names_uploaded_set:
+            tag_names_uploaded_set.remove(release.tag_name)
 
 if tag_names_uploaded_set:
     raise Exception('Not all of the model were released. Models that were not'

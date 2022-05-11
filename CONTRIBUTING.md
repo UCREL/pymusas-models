@@ -78,6 +78,12 @@ python model_release.py
 Once ran successfully it will state the rate limit you had and have left on the GitHub REST API, like below:
 
 ``` bash
+Current rate limit: {'limit': 5000, 'used': 74, 'remaining': 4926, 'reset': 1652299539}
+
+
+
+
+Rate limit after model releases: {'limit': 5000, 'used': 76, 'remaining': 4924, 'reset': 1652299539}
 ```
 
 In addition you should see the models you wanted to release to GitHub now on GitHub within the [releases section](https://github.com/UCREL/pymusas-models/releases).
