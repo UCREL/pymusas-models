@@ -36,6 +36,23 @@
         }
         
     },
+    "fi" : {
+        "resources":[
+            {
+                "data type": "single", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/9b3e7920e7b8e997ec36ca02410cd4f57f5a8835/Finnish/pos_mapped_semantic_lexicon_fin.tsv"
+            }
+        ],
+        "model information": {
+            "POS mapper": "UPOS",
+            "spacy version": ">=3.3,<4.0"
+        },
+        "language data":{
+            "description": "Finnish",
+            "macrolanguage": "fi",
+            "script": "Latn"
+        }
+    },
     "fr": {
         "resources":[
             {

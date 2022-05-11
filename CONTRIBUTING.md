@@ -96,7 +96,7 @@ Once you have corrected the error re-run the [model_release.py](./model_release.
 
 If you want to specify the version of model, e.g. the `c` part of model version as described in [the model versioning section within the main README](./README.md#model-versioning) use the `--model-version` command line option (**default value "0"**).
 
-In addition to specify the version of `spaCy` that the model will be compatible with use the `--spacy-version` command line option (**default value ">=3.0"**). This spaCy version is overridden per language if the language resource file for a given language specifies a `spacy version`. See `python pymusas_models/__main__.py create-models --help` for more details.
+In addition to specify the version of `spaCy` that the model will be compatible with use the `--spacy-version` command line option (**default value ">=3.0,<4.0"**). This spaCy version is overridden per language if the language resource file for a given language specifies a `spacy version`. See `python pymusas_models/__main__.py create-models --help` for more details.
 
 Below we show how both of these command line options can be used:
 
@@ -105,7 +105,7 @@ python pymusas_models/__main__.py create-models \
 --models-directory ./models \
 --language-resource-file ./language_resources.json \
 --model-version 1 \
---spacy-version ">=3.0"
+--spacy-version ">=3.0,<4.0"
 ```
 
 This will create the following folders, assuming we are using PyMUSAS version `0.3.0`:
@@ -115,7 +115,7 @@ This will create the following folders, assuming we are using PyMUSAS version `0
 * `./models/cy_dual_basiccorcencc2usas_contextual-0.3.1`
 * other model folders
 
-Of which all of these models will enforce a spaCy version `>=3.0`.
+Of which all of these models will enforce a spaCy version `>=3.0,<4.0`.
 
 ## Creating the overview of the models table
 
@@ -326,22 +326,22 @@ Below is an extract of the [./language_resources.json](./language_resources.json
             "script": "Hani"
         }
     },
-    "nl" : {
+    "fi" : {
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Dutch/semantic_lexicon_dut.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/9b3e7920e7b8e997ec36ca02410cd4f57f5a8835/Finnish/pos_mapped_semantic_lexicon_fin.tsv"
             }
         ],
         "model information": {
-            "POS mapper": "UPOS"
+            "POS mapper": "UPOS",
+            "spacy version": ">=3.3,<4.0"
         },
         "language data":{
-            "description": "Dutch, Flemish",
-            "macrolanguage": "nl",
+            "description": "Finnish",
+            "macrolanguage": "fi",
             "script": "Latn"
         }
-        
     },
     ...
 }
