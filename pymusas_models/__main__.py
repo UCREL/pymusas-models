@@ -27,7 +27,8 @@ PYMUSAS_LANG_TO_SPACY = {
     'es': 'es',
     'cy': 'xx',
     'id': 'id',
-    'fi': 'fi'
+    'fi': 'fi',
+    'en': 'en'
 }
 POS_MAPPER_TO_NAME = {
     'UPOS': 'upos2usas',
@@ -233,6 +234,9 @@ def create_pymusas_config(spacy_config: Dict[str, Any], single_lexicon_url: str,
     if language_code == 'id':
         default_punctuation_tags = ["Z"]
         default_number_tags = ["CD"]
+    if language_code == 'en':
+        default_punctuation_tags = ["PUNCT"]
+        default_number_tags = ["NUM"]
 
     spacy_config["initialize"]["components"]["pymusas_rule_based_tagger"] = {
         "ranker": {

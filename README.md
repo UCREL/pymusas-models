@@ -68,6 +68,8 @@ Similar to the the spaCy models, our model versioning reflects the compatibility
 | Dutch, Flemish (nl) | nl_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.15MB |
 | Portuguese (pt) | pt_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 0.27MB |
 | Portuguese (pt) | pt_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.25MB |
+| English (en) | en_dual_none_contextual | :heavy_check_mark: | None | Contextual | 0.88MB |
+| English (en) | en_single_none_contextual | :x: | None | Contextual | 0.73MB |
 
 * MWE -- :heavy_check_mark: means that the model supports identification and tagging of Multi Word Expressions.
 
