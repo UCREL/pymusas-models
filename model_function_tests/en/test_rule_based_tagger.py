@@ -15,8 +15,8 @@ def test_single_UPOS_contextual() -> None:
     expected_output = [
         ['A10+'],
         ['S5+c'],
-        ['Q4.2/S2mf','Y2','K5.1'],
-        ['A9+', 'Z5','A2.2','S4'],
+        ['Q4.2/S2mf', 'Y2', 'K5.1'],
+        ['A9+', 'Z5', 'A2.2', 'S4'],
         ['PUNCT']
     ]
 
@@ -33,8 +33,8 @@ def test_dual_UPOS_contextual() -> None:
     expected_output = [
         ['Df/S5+c'],
         ['Df/S5+c'],
-        ['Q4.2/S2mf','Y2','K5.1'],
-        ['A9+', 'Z5','A2.2','S4'],
+        ['Q4.2/S2mf', 'Y2', 'K5.1'],
+        ['A9+', 'Z5', 'A2.2', 'S4'],
         ['PUNCT']
     ]
 
