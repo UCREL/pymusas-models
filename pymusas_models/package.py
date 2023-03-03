@@ -549,6 +549,7 @@ def load_model_from_init_py(
     *,
     vocab: Union["Vocab", bool] = True,
     disable: Iterable[str] = SimpleFrozenList(),
+    enable: Iterable[str] = SimpleFrozenList(),
     exclude: Iterable[str] = SimpleFrozenList(),
     config: Union[Dict[str, Any], Config] = SimpleFrozenDict(),
 ) -> "Language":
@@ -559,6 +560,8 @@ def load_model_from_init_py(
     disable (Iterable[str]): Names of pipeline components to disable. Disabled
         pipes will be loaded but they won't be run unless you explicitly
         enable them by calling nlp.enable_pipe.
+    enable (Iterable[str]): Names of pipeline components to enable. All other
+        pipes will be disabled.
     exclude (Iterable[str]): Names of pipeline components to exclude. Excluded
         components won't be loaded.
     config (Dict[str, Any] / Config): Config overrides as nested dict or dict
@@ -575,6 +578,7 @@ def load_model_from_init_py(
         data_path,
         vocab=vocab,
         meta=meta,
+        enable=enable,
         disable=disable,
         exclude=exclude,
         config=config,
