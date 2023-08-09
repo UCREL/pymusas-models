@@ -174,11 +174,11 @@
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/fd4f69aac247f46257f3b25d3c59f8336d6700d6/English/semantic_lexicon_en.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/master/English/semantic_lexicon_en.tsv"
             },
             {
                 "data type": "mwe",
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/fd4f69aac247f46257f3b25d3c59f8336d6700d6/English/mwe-en.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/master/English/mwe-en.tsv"
             }
         ],
         "model information": {
