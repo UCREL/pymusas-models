@@ -61,7 +61,7 @@ This will create the following folders:
 
 ### Releasing the models to GitHub
 
-To automate the release of the models we have created we are going to use the [GitHub REST API](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api). This REST API has a rate limit of 5000 calls per hour when you are running it as an authenticated client, for [details on authentication](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api#authentication). As we are creating releases we need to have a Personal Access Token (PAT) for authentication with `public_repo` scope, the PAT can be created at the following [link](https://github.com/settings/tokens/new), we named our PAT `pymusas-models`.
+To automate the release of the models we are going to use the [GitHub REST API](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api). This REST API has a rate limit of 5000 calls per hour when you are running it as an authenticated client, for [details on authentication](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api#authentication). As we are creating releases we need to have a Personal Access Token (PAT) for authentication with `public_repo` scope, the PAT can be created at the following [link](https://github.com/settings/tokens/new), we named our PAT `pymusas-models`.
 
 Once you have created your PAT add it to the following file `GITHUB_TOKEN.json` **this file should never be added to the repository as it will contain your PAT which is sensitive information.** The PAT should be added to the JSON file like so:
 
