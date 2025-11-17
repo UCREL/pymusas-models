@@ -37,5 +37,5 @@ def test_create_and_install_models(tmp_path: Path,
                     session_virtualenv.install_package(f"{dist_file_path}",
                                                        installer="pip")
     # Required to run the functional tests
-    session_virtualenv.install_package('pytest>=6.0,!=7.1.0,!=8.1.0',
+    session_virtualenv.install_package("pytest",
                                        installer='pip')
