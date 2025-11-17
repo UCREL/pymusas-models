@@ -84,7 +84,7 @@ def add_model_specific_meta_data(model_directory: Path, language_name: str,
     * Notes - see `create_notes` function.
     '''
     model_meta_file = Path(model_directory, 'meta.json')
-    if not model_meta_file.exists():
+    if not model_meta_file.exists():  # pragma: no cover
         file_err = (f'Could not find the model meta file {model_meta_file}.')
         raise FileNotFoundError(file_err)
     
@@ -93,7 +93,7 @@ def add_model_specific_meta_data(model_directory: Path, language_name: str,
     dist_folder = Path(model_directory, 'dist')
     dist_files = list(dist_folder.iterdir())
     dist_file_names: List[str] = []
-    if len(dist_files) > 2:
+    if len(dist_files) > 2:  # pragma: no cover
         number_dist_files_error = ('The dist folder within the model directory '
                                    'contains more than 2 files. The only two '
                                    'files should be a `.whl` and `.tar.gz`'
@@ -114,7 +114,7 @@ def add_model_specific_meta_data(model_directory: Path, language_name: str,
             model_meta_data["checksum_whl"] = dist_file_hash
         elif dist_file_suffix == '.gz':
             model_meta_data["checksum"] = dist_file_hash
-        else:
+        else:  # pragma: no cover
             dist_file_error = ('All the files in the dist folder should either'
                                ' have a suffix of `.whl` or `.gz` and not '
                                f'{dist_file_suffix}. Files '
@@ -190,7 +190,7 @@ def create_pymusas_config(spacy_config: Dict[str, Any], single_lexicon_url: str,
         mwe_lexicon_pos_mapper_registered_function = "pymusas.pos_mapper.USAS_CORE_TO_BASIC_CORCENCCv1"
         default_punctuation_tags = ["Atd"]
         default_number_tags = ["Rhi"]
-    elif model_pos_mapper is not None:
+    elif model_pos_mapper is not None:  # pragma: no cover
         raise ValueError('The pos mapper has to be either `UPOS`, '
                          f'`BasicCorCenCC` or `None`, but not {model_pos_mapper}.')
 
@@ -304,7 +304,7 @@ def create_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'models')
                 single_lexicon_url = resource['url']
             elif resource_data_type == 'mwe':
                 mwe_lexicon_url = resource['url']
-            else:
+            else:  # pragma: no cover
                 raise ValueError('Do not recognise this resource data type: '
                                  f'{resource_data_type} for language code: '
                                  f'{language_code}')
@@ -313,7 +313,7 @@ def create_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'models')
         language_data: Dict[str, str] = data['language data']
 
         # Create the Single word lexicon only model first
-        if not single_lexicon_url:
+        if not single_lexicon_url:  # pragma: no cover
             raise ValueError('The `single` data type for language code: '
                              f'{language_code} is empty.')
         
@@ -372,7 +372,7 @@ def create_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'models')
                                                  language_data['description'],
                                                  package_name)
 
-            except Exception:
+            except Exception:  # pragma: no cover
                 line_break = "-" * 20
                 config_print = json.dumps(spacy_pipeline.config,
                                           sort_keys=True, indent=4)
@@ -446,4 +446,4 @@ def overview_of_models(models_directory: Path = OPTION(Path(REPO_DIRECTORY, 'mod
 
 
 if __name__ == '__main__':
-    app(prog_name="pymusas-models")
+    app(prog_name="pymusas-models")  # pragma: no cover

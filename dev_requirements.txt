@@ -1,9 +1,0 @@
-mypy==0.981
-flake8>=3.8.0,<3.10.0
-isort>=5.5.4
-pytest>=6.0.0
-pytest-fixture-config @ git+https://github.com/man-group/pytest-plugins.git@e07b520ed4c9809853631f0856736a6342a4fbae#subdirectory=pytest-fixture-config&egg=pytest-fixture-config
-    pytest-shutil @ git+https://github.com/man-group/pytest-plugins.git@e07b520ed4c9809853631f0856736a6342a4fbae#subdirectory=pytest-shutil&egg=pytest-shutil
-pytest-virtualenv @ git+https://github.com/man-group/pytest-plugins.git@e07b520ed4c9809853631f0856736a6342a4fbae#subdirectory=pytest-virtualenv&egg=pytest-virtualenv
-ghapi==0.1.20
-importlib-metadata<5.0.0

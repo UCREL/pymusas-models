@@ -9,12 +9,12 @@ from pymusas_models.__main__ import app
 def test_create_and_install_models(tmp_path: Path,
                                    session_virtualenv: VirtualEnv) -> None:
     repo_directory = Path(__file__, '..', '..').resolve()
-    requirements_file = str(Path(repo_directory, 'requirements.txt'))
-    dev_requirements_file = str(Path(repo_directory, 'dev_requirements.txt'))
-    session_virtualenv.install_package(f"-r {requirements_file}",
-                                       installer="pip")
-    session_virtualenv.install_package(f"-r {dev_requirements_file}",
-                                       installer="pip")
+    # requirements_file = str(Path(repo_directory, 'requirements.txt'))
+    # dev_requirements_file = str(Path(repo_directory, 'dev_requirements.txt'))
+    # session_virtualenv.install_package(f"-r {requirements_file}",
+    #                                   installer="pip")
+    # session_virtualenv.install_package(f"-r {dev_requirements_file}",
+    #                                   installer="pip")
     session_virtualenv.install_package(f"{str(repo_directory)}", installer="pip")
 
     language_resource_file = Path(repo_directory, 'language_resources.json')
@@ -36,3 +36,6 @@ def test_create_and_install_models(tmp_path: Path,
                     dist_file_path = str(dist_file.resolve())
                     session_virtualenv.install_package(f"{dist_file_path}",
                                                        installer="pip")
+    # Required to run the functional tests
+    session_virtualenv.install_package('pytest>=6.0,!=7.1.0,!=8.1.0',
+                                       installer='pip')

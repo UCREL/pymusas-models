@@ -8,3 +8,5 @@ build
 temp_venv
 dist
 GITHUB_TOKEN.json
+.coverage
+.venv

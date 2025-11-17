@@ -31,6 +31,7 @@ dependencies = [
     "typer>=0.3.0,<1.0.0",
     "catalogue>=2.0.6,<2.1.0",
     "thinc>=8.0.12,<8.4.0",
+    "wheel>=0.45.1",
 ]
 
 [project.urls]
@@ -56,7 +57,7 @@ dev = [
     "isort>=6.0",
     "mypy>=1.12",
     "pytest>=6.0,!=7.1.0,!=8.1.0",
-    "pytest-fixture-config>=1.8.1,<2.0.0",
+    "pytest-fixture-config>=1.8.0,<2.0.0",
     "pytest-shutil>=1.8.1,<2.0.0",
     "pytest-virtualenv>=1.8.1,<2.0.0",
     "fastcore>=1.7.2,<2.0.0",
@@ -127,9 +128,9 @@ testpaths = [
 [tool.coverage.run]
 branch = true
 source = [
-    "pymusas"
+    "pymusas_models"
 ]
-command_line = "-m pytest"
+command_line = "-m pytest --virtual-env-directory=./temp_venv --overwrite ./model_creation_tests"
 
 [tool.coverage.report]
 show_missing = true

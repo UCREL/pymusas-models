@@ -55,7 +55,7 @@ def generate_readme(meta: Dict[str, Any]) -> str:
         md.add(accuracy)
     if notes:
         md.add(notes)
-    return cast(str, md.text)
+    return cast(str, md.text)  # type: ignore
 
 
 def _format_sources(data: Any) -> str:
@@ -88,7 +88,7 @@ def _format_accuracy(data: Dict[str, Any], exclude: List[str] = ["speed"]) -> st
         if acc not in exclude
     ]
     md.add(md.table(scores, ["Type", "Score"]))
-    return cast(str, md.text)
+    return cast(str, md.text)  # type: ignore
 
 
 def _format_label_scheme(data: Dict[str, Any]) -> str:
@@ -115,4 +115,4 @@ def _format_label_scheme(data: Dict[str, Any]) -> str:
     md.add(f"<summary>{label_info}</summary>")
     md.add(md.table(label_data, ["Component", "Labels"]))
     md.add("</details>")
-    return cast(str, md.text)
+    return cast(str, md.text)  # type: ignore

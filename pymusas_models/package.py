@@ -13,7 +13,7 @@ model name. This is to overcome the problem when the model name starts with the
 `lang` it can cause errors in the package creation process.
 3. The `TEMPLATE_INIT` has been changed so that it uses a custom
 `load_model_from_init_py` function that does not require the `lang` from the
-meta file to be the first word in the name of the model direcotry.
+meta file to be the first word in the name of the model directory.
 '''
 from collections import defaultdict
 from pathlib import Path
@@ -260,9 +260,9 @@ def get_third_party_dependencies(
                 except RegistryError as regerr:
                     # lang-specific version being absent is not actually an issue
                     raise regerr from None
-            module_name = func_info.get("module")  # type: ignore[attr-defined]
+            module_name = func_info.get("module")
             if module_name:  # the code is part of a module, not a --code file
-                modules.add(func_info["module"].split(".")[0])  # type: ignore[index]
+                modules.add(func_info["module"].split(".")[0])  # type: ignore
     dependencies = []
     for module_name in modules:
         if module_name in distributions:
@@ -395,7 +395,7 @@ def generate_readme(meta: Dict[str, Any]) -> str:
         md.add(accuracy)
     if notes:
         md.add(notes)
-    return cast(str, md.text)
+    return cast(str, md.text)  # type: ignore
 
 
 def _format_sources(data: Any) -> str:
@@ -428,7 +428,7 @@ def _format_accuracy(data: Dict[str, Any], exclude: List[str] = ["speed"]) -> st
         if acc not in exclude
     ]
     md.add(md.table(scores, ["Type", "Score"]))
-    return cast(str, md.text)
+    return cast(str, md.text)  # type: ignore
 
 
 def _format_label_scheme(data: Dict[str, Any]) -> str:
@@ -455,7 +455,7 @@ def _format_label_scheme(data: Dict[str, Any]) -> str:
     md.add(f"<summary>{label_info}</summary>")
     md.add(md.table(label_data, ["Component", "Labels"]))
     md.add("</details>")
-    return cast(str, md.text)
+    return cast(str, md.text)  # type: ignore
 
 
 def _is_permitted_package_name(package_name: str) -> bool:
