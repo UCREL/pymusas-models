@@ -3,11 +3,11 @@
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Chinese/semantic_lexicon_chi.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Chinese/semantic_lexicon_chi.tsv"
             }, 
             {
                 "data type": "mwe", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Chinese/mwe-chi.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Chinese/mwe-chi.tsv"
             }
         ],
         "model information": {
@@ -23,7 +23,7 @@
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Dutch/semantic_lexicon_dut.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Dutch/semantic_lexicon_dut.tsv"
             }
         ],
         "model information": {
@@ -40,7 +40,7 @@
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/9b3e7920e7b8e997ec36ca02410cd4f57f5a8835/Finnish/pos_mapped_semantic_lexicon_fin.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Finnish/semantic_lexicon_fin.tsv"
             }
         ],
         "model information": {
@@ -57,7 +57,7 @@
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/French/semantic_lexicon_fr.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/French/semantic_lexicon_fr.tsv"
             }
         ],
         "model information": {
@@ -74,11 +74,11 @@
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Italian/semantic_lexicon_ita.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Italian/semantic_lexicon_ita.tsv"
             },
             {
                 "data type": "mwe", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Italian/mwe-ita.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Italian/mwe-ita.tsv"
             }
         ],
         "model information": {
@@ -95,11 +95,11 @@
         "resources": [
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Portuguese/semantic_lexicon_pt.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Portuguese/semantic_lexicon_pt.tsv"
             },
             {
                 "data type": "mwe", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Portuguese/mwe-pt.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Portuguese/mwe-pt.tsv"
             }
         ],
         "model information": {
@@ -116,11 +116,11 @@
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Spanish/semantic_lexicon_es.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Spanish/semantic_lexicon_es.tsv"
             },
             {
                 "data type": "mwe", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Spanish/mwe-es.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/ba3db838caa11b6c9f7cf30bfdbf4f14e2dcd355/Spanish/mwe-es.tsv"
             }
         ],
         "model information": {
@@ -136,11 +136,11 @@
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Welsh/semantic_lexicon_cy.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Welsh/semantic_lexicon_cy.tsv"
             },
             {
                 "data type": "mwe", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Welsh/mwe-welsh.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Welsh/mwe-welsh.tsv"
             }
         ],
         "model information": {
@@ -157,7 +157,7 @@
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Indonesian/semantic_lexicon_id.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Indonesian/semantic_lexicon_id.tsv"
             }
         ],
         "model information": {
@@ -174,11 +174,11 @@
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/master/English/semantic_lexicon_en.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/English/semantic_lexicon_en.tsv"
             },
             {
                 "data type": "mwe",
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/master/English/mwe-en.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/English/mwe-en.tsv"
             }
         ],
         "model information": {
@@ -187,6 +187,26 @@
         "language data":{
             "description": "English",
             "macrolanguage": "en",
+            "script": "Latn"
+        }
+    },
+    "da" : {
+        "resources":[
+            {
+                "data type": "single", 
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/b742a90a3295b830fb83487e46301f5bb9c1c2e1/Danish/semantic_lexicon_dk.tsv"
+            },
+            {
+                "data type": "mwe",
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Danish/mwe-dk.tsv"
+            }
+        ],
+        "model information": {
+            "POS mapper": null
+        },
+        "language data":{
+            "description": "Danish",
+            "macrolanguage": "da",
             "script": "Latn"
         }
     }

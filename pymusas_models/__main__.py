@@ -28,7 +28,8 @@ PYMUSAS_LANG_TO_SPACY = {
     'cy': 'xx',
     'id': 'id',
     'fi': 'fi',
-    'en': 'en'
+    'en': 'en',
+    'da': 'da'
 }
 POS_MAPPER_TO_NAME = {
     'UPOS': 'upos2usas',
@@ -234,7 +235,7 @@ def create_pymusas_config(spacy_config: Dict[str, Any], single_lexicon_url: str,
     if language_code == 'id':
         default_punctuation_tags = ["Z"]
         default_number_tags = ["CD"]
-    if language_code == 'en':
+    if language_code == 'en' or language_code == 'da':
         default_punctuation_tags = ["PUNCT"]
         default_number_tags = ["NUM"]
 
@@ -254,7 +255,7 @@ A path to a directory whereby all of the PyMUSAS models will be stored
 in their own separate folders within this directory.
 '''
 LANGUAGE_RESOURCE_FILE_HELP = '''
-A path to a language resource meta data file, see the `developer_readme`
+A path to a language resource meta data file, see the `CONTRIBUTING.md`
 under section `Language Resource Meta Data` for details
 on how the meta data should be structured. This meta data file specifies
 what PyMUSAS models should be created based on the meta data contents.

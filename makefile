@@ -1,10 +1,17 @@
 .ONESHELL:
 SHELL:=/bin/bash
 
-model-creation-tests:
+.PHONY: test-clean
+test-clean:
+	@rm -rf ./temp_venv
+	@rm -f ./.coverage
+
+.PHONY: model-creation-tests
+model-creation-tests: test-clean
 	@uv run coverage run
 	@uv run coverage report
 
+.PHONY: model-function-tests
 model-function-tests:
 	source ./temp_venv/venv/bin/activate
 	pytest ./model_function_tests

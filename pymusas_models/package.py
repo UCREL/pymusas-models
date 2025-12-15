@@ -362,7 +362,7 @@ def generate_readme(meta: Dict[str, Any]) -> str:
     pipeline = ", ".join([md.code(p) for p in meta.get("pipeline", [])])
     components = ", ".join([md.code(p) for p in meta.get("components", [])])
     vecs = meta.get("vectors", {})
-    vectors = f"{vecs.get('keys', 0)} keys, {vecs.get('vectors', 0)} unique vectors ({ vecs.get('width', 0)} dimensions)"
+    vectors = f"{vecs.get('keys', 0)} keys, {vecs.get('vectors', 0)} unique vectors ({vecs.get('width', 0)} dimensions)"
     author = meta.get("author") or "n/a"
     model_size = meta.get("size") or "n/a"
     notes = meta.get("notes", "")
@@ -423,7 +423,7 @@ def _format_accuracy(data: Dict[str, Any], exclude: List[str] = ["speed"]) -> st
     md = MarkdownRenderer()
     scalars = [(k, v) for k, v in data.items() if isinstance(v, (int, float))]
     scores = [
-        (md.code(acc.upper()), f"{score*100:.2f}")
+        (md.code(acc.upper()), f"{score * 100:.2f}")
         for acc, score in scalars
         if acc not in exclude
     ]
