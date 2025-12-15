@@ -116,11 +116,11 @@
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Spanish/semantic_lexicon_es.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Spanish/semantic_lexicon_es.tsv"
             },
             {
                 "data type": "mwe", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/ba3db838caa11b6c9f7cf30bfdbf4f14e2dcd355/Spanish/mwe-es.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Spanish/mwe-es.tsv"
             }
         ],
         "model information": {
@@ -194,7 +194,7 @@
         "resources":[
             {
                 "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/b742a90a3295b830fb83487e46301f5bb9c1c2e1/Danish/semantic_lexicon_dk.tsv"
+                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Danish/semantic_lexicon_dk.tsv"
             },
             {
                 "data type": "mwe",
