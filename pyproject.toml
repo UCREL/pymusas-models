@@ -1,6 +1,6 @@
 [project]
 name = "pymusas_models"
-version = "0.1.0"
+version = "0.2.0"
 description = "Helper modules that are used to create PyMUSAS models"
 authors = [
     { name = "UCREL Research Centre", email = "ucrel@lancaster.ac.uk" }
@@ -18,13 +18,14 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Scientific/Engineering",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research"
 ]
-requires-python = ">=3.10, <3.14"
+requires-python = ">=3.10, <3.15"
 dependencies = [
-    "pymusas==0.3.0",
+    "pymusas==0.4.0",
     "spacy>=3.1.4",
     "wasabi>=0.8.1,<1.2.0",
     "srsly>=2.4.1,<3.0",
