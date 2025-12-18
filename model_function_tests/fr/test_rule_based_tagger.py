@@ -9,7 +9,7 @@ TEST_SPACES = [True] * len(TEST_TOKENS)
 
 
 def test_single_UPOS_contextual() -> None:
-    french_model = spacy.load("fr_single_upos2usas_contextual")
+    french_model = spacy.load("fr_single_upos2usas_contextual_none")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, pos=TEST_POS)
     output = french_model(doc)
     expected_output = [

@@ -18,13 +18,15 @@ All of the models are released through [GitHub releases](https://github.com/UCRE
 
 ## Model introduction
 
-All of the models are rule based taggers, and all output [USAS semantic categories](https://ucrel.lancs.ac.uk/usas/) on the token level. The rules rely on lexicon and lexical information to classify a token into semantic categories. The lexicon information comes from a lexicon, of which the lexicons used in these models all come from the [Multilingual USAS GitHub repository](https://github.com/UCREL/Multilingual-USAS). The lexical information used is the `text`, `lemma`, and `Part Of Speech (POS)` of the token, this information is then used to find the correct lexicon entry in the given lexicon(s). **Note** that not all lexical information is required, but the more information the more likely you will have a more accurate tagger.
+The models are a mix of rule based taggers and neural taggers, and all output [USAS semantic categories](https://ucrel.lancs.ac.uk/usas/) on the token level. The rules rely on lexicon and lexical information to classify a token into semantic categories. The lexicon information comes from a lexicon, of which the lexicons used in these models all come from the [Multilingual USAS GitHub repository](https://github.com/UCREL/Multilingual-USAS). The lexical information used is the `text`, `lemma`, and `Part Of Speech (POS)` of the token, this information is then used to find the correct lexicon entry in the given lexicon(s). **Note** that not all lexical information is required, but the more information the more likely you will have a more accurate tagger.
 
 If the model uses a Multi Word Expression (MWE) lexicon then the tagger can identify MWEs and their associated semantic categories. Furthermore, these lexicons can be more than just lookup tables they can contain a pattern matching syntax, of which more details of this can be found in these [notes](https://ucrel.github.io/pymusas/usage/notes/mwe_syntax). In addition, the POS tagset used in these lexicons can differ from the tagset within the lexical information therefore POS mappers are used to map from the lexical POS tagset (lexical POS tagset is most likely determined by the POS tagger used on the text) to the lexicon POS tagset.
 
 As a token or tokens, in MWE cases, can be matched to multiple lexicon entries the rule based tagger uses a ranking system to determine the best token match.
 
 For more detailed information on the rule based tagger go to the following [PyMUSAS API documentation page](https://ucrel.github.io/pymusas/api/spacy_api/taggers/rule_based).
+
+The neural taggers use one of the neural models found within the following [HuggingFace collection](https://huggingface.co/collections/ucrelnlp/usas-neural-taggers-10). They only require the text to be tokenized therefore do not need lemma or POS information. In addition some of the models are highly multilingual therefore covering many languages. **NOTE** the performance of these model vary a lot between languages therefore please look at the model performance before choosing a model.
 
 ## Model naming conventions
  
@@ -33,14 +35,24 @@ We expect all model packages to follow the naming convention of `[lang]_[name]`,
 * **rules** used:
     * `single`: Only a single word lexicon is used.
     * `dual`: Both a single and Multi Word Expression lexicons are used.
+    * `none` : no rules used. (typically a neural only model).
 * **POS Mapping** used to map the POS tagset from the tagged text to the POS tagset used in the lexicons of the rule based tagger.
     * `upos2usas`: Maps from [UPOS](https://universaldependencies.org/u/pos/) tagged text to USAS core tagset of the lexicons.
     * `basiccorcencc2usas`: Maps [Basic CorCenCC](https://ucrel.github.io/pymusas/api/pos_mapper) tagged text to USAS core tagset of the lexicons.
     * `none`: No POS mapper was used.
 * **ranker** the ranker used to determine the best lexicon entry match for the token.
     * `contextual`: Uses the `ContextualRuleBasedRanker`, which ranks based on heuristic rules and then finds the best lexicon match for each token taking into account all other tokens in the text. For more details on this ranker see the [ContextualRuleBasedRanker documentation](https://ucrel.github.io/pymusas/api/rankers/lexicon_entry#contextualrulebasedranker).
+    * `none` : does not use a ranker. (typically a neural only model).
+* **neural** model used:
+    * `englishsmallbem` : Uses the [ucrelnlp/PyMUSAS-Neural-English-Small-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-English-Small-BEM) neural model which is 17 million parameter in size.
+    * `englishbasebem` : Uses the [ucrelnlp/PyMUSAS-Neural-English-Base-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-English-Base-BEM) neural model which is 68 million parameter in size.
+    * `multilingualsmallbem` : Uses the [ucrelnlp/PyMUSAS-Neural-Multilingual-Small-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-Multilingual-Small-BEM) neural model which is 140 million parameter in size.
+    * `multilingualbasebem` : Uses the [ucrelnlp/PyMUSAS-Neural-Multilingual-Base-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-Multilingual-Base-BEM) neural model which is 307 million parameter in size.
+    * `none` : does not use a neual model.
 
-For example, `cy_single_basiccorcencc2usas_contextual` is a Welsh single word lexicon model that maps the tagged text POS labels from Basic CorCenCC tagset to the USAS core tagset to be compatible with the lexicons used in this rule based tagger and uses the `contextual` ranker.
+For example, `cy_single_basiccorcencc2usas_contextual_none` is a Welsh single word lexicon model that maps the tagged text POS labels from Basic CorCenCC tagset to the USAS core tagset to be compatible with the lexicons used in this rule based tagger and uses the `contextual` ranker.
+
+`en_none_none_none_englishsmallbem` is an English model that uses only the Small English BEM neural model ([ucrelnlp/PyMUSAS-Neural-English-Small-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-English-Small-BEM)).
 
 ### Model versioning
 
@@ -52,24 +64,30 @@ Similar to the the spaCy models, our model versioning reflects the compatibility
 
 ## Overview of the models
 
-| Language (BCP 47 language code) | Model Name | MWE | POS Mapper | Ranker | File Size |
-| --- | --- | --- | --- | --- | --- |
-| Mandarin Chinese (cmn) | cmn_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 1.28MB |
-| Mandarin Chinese (cmn) | cmn_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 1.00MB |
-| Welsh (cy) | cy_dual_basiccorcencc2usas_contextual | :heavy_check_mark: | Basic CorCenCC 2 USAS | Contextual | 1.09MB |
-| Welsh (cy) | cy_single_basiccorcencc2usas_contextual | :x: | Basic CorCenCC 2 USAS | Contextual | 1.09MB |
-| Spanish, Castilian (es) | es_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 0.20MB |
-| Spanish, Castilian (es) | es_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.16MB |
-| Finnish (fi) | fi_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.63MB |
-| French (fr) | fr_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.08MB |
-| Indonesian (id) | id_single_none_contextual | :x: | None | Contextual | 0.24MB |
-| Italian (it) | it_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 0.50MB |
-| Italian (it) | it_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.42MB |
-| Dutch, Flemish (nl) | nl_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.15MB |
-| Portuguese (pt) | pt_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 0.27MB |
-| Portuguese (pt) | pt_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.25MB |
-| English (en) | en_dual_none_contextual | :heavy_check_mark: | None | Contextual | 0.88MB |
-| English (en) | en_single_none_contextual | :x: | None | Contextual | 0.73MB |
+| Language (BCP 47 language code) | Model Name | MWE | POS Mapper | Ranker | Neural Model | File Size |
+| --- | --- | --- | --- | --- | --- | --- |
+| Mandarin Chinese (cmn) | cmn_dual_upos2usas_contextual_none | :heavy_check_mark: | UPOS 2 USAS | Contextual | :x: | 1.28MB |
+| Mandarin Chinese (cmn) | cmn_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 1.00MB |
+| Welsh (cy) | cy_dual_basiccorcencc2usas_contextual_none | :heavy_check_mark: | Basic CorCenCC 2 USAS | Contextual | :x: | 1.10MB |
+| Welsh (cy) | cy_single_basiccorcencc2usas_contextual_none | :x: | Basic CorCenCC 2 USAS | Contextual | :x: | 1.09MB |
+| Danish (da) | da_dual_none_contextual_none | :heavy_check_mark: | None | Contextual | :x: | 0.85MB |
+| Danish (da) | da_single_none_contextual_none | :x: | None | Contextual | :x: | 0.68MB |
+| English (en) | en_dual_none_contextual_none | :heavy_check_mark: | None | Contextual | :x: | 0.86MB |
+| English (en) | en_none_none_none_englishsmallbem | :x: | :x: | :x: | [ucrelnlp/PyMUSAS-Neural-English-Small-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-English-Small-BEM) | 60.18MB |
+| English (en) | en_none_none_none_englishbasebem | :x: | :x: | :x: | [ucrelnlp/PyMUSAS-Neural-English-Base-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-English-Base-BEM) | 242.06MB |
+| English (en) | en_single_none_contextual_none | :x: | None | Contextual | :x: | 0.71MB |
+| Spanish, Castilian (es) | es_dual_upos2usas_contextual_none | :heavy_check_mark: | UPOS 2 USAS | Contextual | :x: | 0.26MB |
+| Spanish, Castilian (es) | es_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.20MB |
+| Finnish (fi) | fi_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.64MB |
+| French (fr) | fr_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.08MB |
+| Indonesian (id) | id_single_none_contextual_none | :x: | None | Contextual | :x: | 0.24MB |
+| Italian (it) | it_dual_upos2usas_contextual_none | :heavy_check_mark: | UPOS 2 USAS | Contextual | :x: | 0.50MB |
+| Italian (it) | it_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.42MB |
+| Dutch, Flemish (nl) | nl_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.15MB |
+| Portuguese (pt) | pt_dual_upos2usas_contextual_none | :heavy_check_mark: | UPOS 2 USAS | Contextual | :x: | 0.27MB |
+| Portuguese (pt) | pt_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.25MB |
+| Multilingual (xx) | xx_none_none_none_multilingualsmallbem | :x: | :x: | :x: | [ucrelnlp/PyMUSAS-Neural-Multilingual-Small-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-Multilingual-Small-BEM) | 501.45MB |
+| Multilingual (xx) | xx_none_none_none_multilingualbasebem | :x: | :x: | :x: | [ucrelnlp/PyMUSAS-Neural-Multilingual-Base-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-Multilingual-Base-BEM) | 1089.74MB |
 
 * MWE -- :heavy_check_mark: means that the model supports identification and tagging of Multi Word Expressions.
 

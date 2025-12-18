@@ -9,7 +9,8 @@ TEST_SPACES = [True] * len(TEST_TOKENS)
 
 
 def test_single_UPOS_contextual() -> None:
-    welsh_model = spacy.load("cy_single_basiccorcencc2usas_contextual")
+    welsh_model = spacy.load("cy_single_basiccorcencc2usas_contextual_none",
+                             config={"components.pymusas_rule_based_tagger.pos_attribute": "tag_"})
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, tags=TEST_TAGS)
     output = welsh_model(doc)
     expected_output = [
@@ -29,7 +30,8 @@ def test_single_UPOS_contextual() -> None:
 
 
 def test_dual_UPOS_contextual() -> None:
-    welsh_model = spacy.load("cy_dual_basiccorcencc2usas_contextual")
+    welsh_model = spacy.load("cy_dual_basiccorcencc2usas_contextual_none",
+                             config={"components.pymusas_rule_based_tagger.pos_attribute": "tag_"})
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, tags=TEST_TAGS)
     output = welsh_model(doc)
     expected_output = [

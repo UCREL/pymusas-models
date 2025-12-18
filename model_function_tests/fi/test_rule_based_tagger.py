@@ -9,7 +9,7 @@ TEST_SPACES = [True] * len(TEST_TOKENS)
 
 
 def test_single_UPOS_contextual() -> None:
-    finnish_model = spacy.load("fi_single_upos2usas_contextual")
+    finnish_model = spacy.load("fi_single_upos2usas_contextual_none")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, pos=TEST_POS)
     output = finnish_model(doc)
     expected_output = [

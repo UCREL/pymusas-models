@@ -9,12 +9,12 @@ TEST_SPACES = [True] * len(TEST_TOKENS)
 
 
 def test_single_UPOS_contextual() -> None:
-    spanish_model = spacy.load("es_single_upos2usas_contextual")
+    spanish_model = spacy.load("es_single_upos2usas_contextual_none")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, pos=TEST_POS)
     output = spanish_model(doc)
     expected_output = [
         ['Z99'],
-        ['Z5', 'N3'],
+        ['Z5'],
         ['Z5'],
         ['Z99'],
         ['PUNCT'],
@@ -28,7 +28,7 @@ def test_single_UPOS_contextual() -> None:
 
 
 def test_dual_UPOS_contextual() -> None:
-    spanish_model = spacy.load("es_dual_upos2usas_contextual")
+    spanish_model = spacy.load("es_dual_upos2usas_contextual_none")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, pos=TEST_POS)
     output = spanish_model(doc)
     expected_output = [
