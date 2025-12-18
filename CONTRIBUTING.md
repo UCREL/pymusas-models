@@ -58,11 +58,14 @@ uv python pin
 * `/pymusas_models` - contains the code that creates all of the PyMUSAS models.
 * `/model_release.py` - Releases the models, that have been created locally, to GitHub as a [GitHub release](https://github.com/UCREL/pymusas-models/releases) per model. 
 * `/model_creation_tests`
-* `/model_function_tests` - The tests are divided up by language, using each language's [BCP 47 language code](https://www.w3.org/International/articles/language-tags/), and then model (currently we only have one model the `rule based tagger`).
+* `/model_function_tests` - The tests are divided up by language, using each language's [BCP 47 language code](https://www.w3.org/International/articles/language-tags/), and then model (either `rule based tagger` or `neural tagger`).
     * `/model_function_tests/fr`
         * `/model_function_tests/fr/test_rule_based_tagger.py`
     * `/model_function_tests/it`
         * `/model_function_tests/it/test_rule_based_tagger.py`
+    * `/model_function_tests/en`
+        * `/model_function_tests/en/test_neural_tagger.py`
+        * `/model_function_tests/en/test_rule_based_tagger.py`
     * other language codes
 * `/model_creation_tests/test_create_and_install_models.py` - This creates and installs the models used within `tests` and in doing so tests that this part of the code base works. **Note** that we install the models to a temporary Python virtual environment.
 
@@ -83,9 +86,9 @@ python pymusas_models/__main__.py create-models --models-directory ./models --la
 
 This will create the following folders:
 
-* `./models/cmn_dual_upos2usas_contextual-0.3.0`
-* `./models/cmn_single_upos2usas_contextual-0.3.0`
-* `./models/cy_dual_basiccorcencc2usas_contextual-0.3.0`
+* `./models/cmn_dual_upos2usas_contextual_none-0.3.0`
+* `./models/cmn_single_upos2usas_contextual_none-0.3.0`
+* `./models/cy_dual_basiccorcencc2usas_contextual_none-0.3.0`
 * other model folders
 
 ### Releasing the models to GitHub
@@ -139,18 +142,15 @@ Below we show how both of these command line options can be used:
 python pymusas_models/__main__.py create-models \
 --models-directory ./models \
 --language-resource-file ./language_resources.json \
---model-version 1 \
---spacy-version ">=3.0,<4.0"
+--model-version 1
 ```
 
 This will create the following folders, assuming we are using PyMUSAS version `0.3.0`:
 
-* `./models/cmn_dual_upos2usas_contextual-0.3.1`
-* `./models/cmn_single_upos2usas_contextual-0.3.1`
-* `./models/cy_dual_basiccorcencc2usas_contextual-0.3.1`
+* `./models/cmn_dual_upos2usas_contextual_none-0.3.1`
+* `./models/cmn_single_upos2usas_contextual_none-0.3.1`
+* `./models/cy_dual_basiccorcencc2usas_contextual_none-0.3.1`
 * other model folders
-
-Of which all of these models will enforce a spaCy version `>=3.0,<4.0`.
 
 ## Creating the overview of the models table
 
@@ -297,61 +297,92 @@ deactivate
 
 ## Language Resource Meta Data
 
-Language resource meta data is stored in the [language_resources.json file](./language_resources.json), it is used by the entry points to the main package, `pymusas_models`, to create the models. The structure of the JSON file is the following:
+Language resource meta data is stored in the [language_resources.json file](./language_resources.json), it is used by the entry points to the main package, `pymusas_models`, to create the models. The structure of the JSON file is the following, and is validated using the `LanguageResources` Pydantic Base Model class within [pymusas_models/language_resource.py](pymusas_models/language_resource.py):
 
 ``` JSON
 {
-    "Language one BCP 47 code": {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "PERMANENT URL TO RESOURCE"
-            }, 
-            {
-                "data type": "mwe", 
-                "url": "PERMANENT URL TO RESOURCE"
+    "language_resources": {
+        "Language one BCP 47 code": {
+            "spacy_version": ">=3.0,<4.0",
+            "models": [
+                {
+                    "name": "NAME OF MODEL",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "RANKER NAME",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "POS MAPPER NAME OR NONE",
+                                "lexicon_url": "PERMANENT URL TO LEXICON",
+                                "with_pos": true
+                            },
+                            {
+                                "rule_type": "mwe",
+                                "pos_mapper": null,
+                                "lexicon_url": ""
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    },
+                    "config": {
+                        "pos_attribute": "tag_"
+                    }
+                },
+                {
+                    "name": "xx_none_none_none_multilingualsmallbem",
+                    "model_type": "pymusas_neural_tagger",
+                    "pretrained_model_name_or_path": "ucrelnlp/PyMUSAS-Neural-Multilingual-Small-BEM",
+                    "config": {
+                        "tokenizer_kwargs": {
+                            "add_prefix_space": true
+                        }
+                    }
+                }
+            ],
+            "language data": {
+                "description": "LANANGUAGE NAME",
+                "macrolanguage": "Macrolanguage code",
+                "script": "ISO 15924 script code"
             }
-        ],
-        "model information": {
-            "POS mapper": "POS TAGSET",
-            "spacy version": "VERSION OF SPACY"
         },
-        "language data": {
-            "description": "LANANGUAGE NAME",
-            "macrolanguage": "Macrolanguage code",
-            "script": "ISO 15924 script code"
-        }
-    },
-    "Language Two BCP 47 code" : {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "PERMANENT URL TO RESOURCE"
-            }
-        ],
-        "model information": {
-            "POS mapper": null
-        },
-        "language data":{
-            "description": "LANANGUAGE NAME",
-            "macrolanguage": "Macrolanguage code",
-            "script": "ISO 15924 script code"
-        }
-        
-    },
     ...
+    }
 }
 ```
 
 * The [BCP 47 code](https://www.w3.org/International/articles/language-tags/) of the language, the [BCP47 language subtag lookup tool](https://r12a.github.io/app-subtags/) is a great tool to use to find a BCP 47 code for a language.
-  * `resources` - this is a list of resource files that are associated with the given language. There is no limit on the number of resources files associated with a language.
-    * `data type` value can be 1 of 2 values:
-      1. `single` - The `url` value has to be of the **single word lexicon** [file format](https://github.com/UCREL/Multilingual-USAS#single-word-lexicon-file-format).
-      2. `mwe` - The `url` value has to be of the **Multi Word Expression lexicon** [file format](https://github.com/UCREL/Multilingual-USAS#multi-word-expression-mwe-lexicon-file-format).
-    * `url` - permanent URL link to the associated resource.
-  * `model information` - this is data that helps to create the model given the resources and the assumed NLP models, e.g. POS tagger, that will be used with the PyMUSAS model.
-    * `POS mapper` - A mapper from that maps from the POS tagset of the tagged text to the POS tagset used in the lexicons. The mappers used are those from within the [PyMUSAS mappers module.](https://ucrel.github.io/pymusas/api/pos_mapper) We currently assume that each resource associated with the model uses the same POS tagset in the lexicon, this is a limitation of this model creation framework rather than the PyMUSAS package itself.
-    * `spacy version` - **Optional** this key is only required if the version of spaCy required has to be more specific than the version specified by [PyMUSAS](https://github.com/UCREL/pymusas). The version of spaCy required, this should be a String and follow the standard Python pip install syntax of `spaCy` followed by a [version specifier](https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifiers), e.g. `spacy>=3.3`.
+  * `spacy version` - **Optional** this key is only required if the version of spaCy required has to be more specific than the default which is `">=3.0,<4.0`. The version of spaCy required, this should be a String and follow the standard Python pip install syntax of the [version specifier](https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifiers), e.g. `>=3.3`.
+  * `models` - a list of models that are associated with this language. Each model is represented as a dictionary, of which we support two model types `pymusas_rule_based_tagger` and `pymusas_neural_tagger` of which these reflect the models available in pymusas ([neural](hhttps://ucrel.github.io/pymusas/api/spacy_api/taggers/neural) and [rule_based](https://ucrel.github.io/pymusas/api/spacy_api/taggers/rule_based)).
+    * `pymusas_rule_based_tagger`:
+        * `name` - a unique model name that follows the [model naming convention](./README.md#model-naming-conventions)
+        * `model_type` - this should be `pymusas_rule_based_tagger` this was chosen as it follows the spaCy component name of the tagger in [pymusas](https://ucrel.github.io/pymusas/api/spacy_api/taggers/rule_based#rulebasedtagger.class_attributes).
+        * `resources` - The keys and values in this dictionary follows the arguments that the rule based tagger accepts within it's [initialize method.](https://ucrel.github.io/pymusas/api/spacy_api/taggers/rule_based#initialize)
+            * `ranker` - The name of the ranker, in this case it can only be `contextual` as this is the only supported ranker.
+            * `default_punctuation_tags` - list of POS tags that represent punctuation. Can be `null`.
+            * `default_number_tags` - The POS tags that represent numbers. Can be `null`.
+            * `rules` - A list of rules to apply to the sequence of tokens. This has to be a list of dictionaries representing either [Single](https://ucrel.github.io/pymusas/api/taggers/rules/single_word) or [MWE](https://ucrel.github.io/pymusas/api/taggers/rules/mwe) rules.
+                * `rule_type` - `single` or `mwe`
+                * `pos_mapper` - this is the mapping for linking the POS tags of the token's to the lexicon's. It can either be `null` for no mapping, `upos2usas` for UPOS to USAS or `basiccorcencc2usas` for Basic CorCenCC to USAS.
+                * `lexicon_url` - URL to the lexicon to use. This should be a permanent URL, e.g. if the URL is to a GitHub repository the URL should be to a specific commit rather to the HEAD of the main branch.
+                * `with_pos` - Only for `single` rules, whether the lexicon has POS tags or not.
+        * `config` - The keys and values in this dictionary follows the arguments that the rule based tagger accepts within it's [__init__ method](https://ucrel.github.io/pymusas/api/spacy_api/taggers/rule_based#rulebasedtagger):
+            * `pymusas_tags_token_attr` - The name of the attribute to assign the predicted tags too under the Token._ class.
+            * `pymusas_mwe_indexes_attr` - The name of the attribute to assign the start and end token index of the associated MWE too under the Token._ class.
+            * `pos_attribute` - The name of the attribute that the Part Of Speech (POS) tag is assigned too within the Token class.
+            * `lemma_attribute` - The name of the attribute that the lemma is assigned too within the Token class. 
+    * `pymusas_neural_tagger`:
+        * `name` - a unique model name that follows the [model naming convention](./README.md#model-naming-conventions)
+        * `model_type` - this should be `pymusas_neural_tagger` this was chosen as it follows the spaCy component name of the tagger in [pymusas](https://ucrel.github.io/pymusas/api/spacy_api/taggers/neural#neuraltagger.class_attributes).
+        * `resources` - The keys and values in this dictionary follows the arguments that the neural tagger accepts within it's [initialize method.](https://ucrel.github.io/pymusas/api/spacy_api/taggers/neural#initialize)
+            * `pretrained_model_name_or_path` - The string ID or path of the pretrained neural Word Sense Disambiguation (WSD) model to load.
+        * `config` - The keys and values in this dictionary follows the arguments that the neural tagger accepts within it's [__init__ method](https://ucrel.github.io/pymusas/api/spacy_api/taggers/neural#neuraltagger):
+            * `pymusas_tags_token_attr` - The name of the attribute to assign the predicted tags too under the Token._ class.
+            * `pymusas_mwe_indexes_attr` - The name of the attribute to assign the start and end token index of the associated MWE too under the Token._ class.
+            * `top_n` - The number of tags to predict. If -1 all tags will be predicted. If 0 or less than 0 will raise a ValueError.
+            * `device` - The device to load the model, wsd_model, on. e.g. 'cpu'.
+            * `tokenizer_kwargs` - Keyword arguments to pass to the tokenizer's transformers.AutoTokenizer.from_pretrained method.
   * `language data` - this is data that is associated with the `BCP 47` language code. To some degree this is redundant as we can look this data up through the `BCP 47` code, however we thought it is better to have it in the meta data for easy lookup. All of this data can be easily found through looking up the `BCP 47` language code in the [BCP47 language subtag lookup tool](https://r12a.github.io/app-subtags/)
     * `description` - The `description` of the language code.
     * `macrolanguage` - The macrolanguage tag, **note** if this does not exist then give the [primary language tag](https://www.w3.org/International/articles/language-tags/#language), which could be the same as the whole `BCP 47` code. The `macrolanguage` tag could be useful in future for grouping languages.
@@ -360,44 +391,88 @@ Language resource meta data is stored in the [language_resources.json file](./la
 Below is an extract of the [./language_resources.json](./language_resources.json), to give as an example of this JSON structure:
 
 ``` JSON
-{
-    "cmn": {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Chinese/semantic_lexicon_chi.tsv"
-            }, 
-            {
-                "data type": "mwe", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/69477221c3feaf8ab2c2033abf430e5c4ae1d5ce/Chinese/mwe-chi.tsv"
+{   "language_resources": 
+    {
+        "cmn": 
+        {
+            "models": [
+                {
+                    "name": "cmn_single_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Chinese/semantic_lexicon_chi.tsv",
+                                "with_pos": true
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                },
+                {
+                    "name": "cmn_dual_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Chinese/semantic_lexicon_chi.tsv",
+                                "with_pos": true
+                            },
+                            {
+                                "rule_type": "mwe",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Chinese/mwe-chi.tsv"
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                }
+            ],
+            "language_data": {
+                "description": "Mandarin Chinese",
+                "macrolanguage": "zh",
+                "script": "Hani"
             }
-        ],
-        "model information": {
-            "POS mapper": "UPOS"
         },
-        "language data": {
-            "description": "Mandarin Chinese",
-            "macrolanguage": "zh",
-            "script": "Hani"
-        }
-    },
-    "fi" : {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/9b3e7920e7b8e997ec36ca02410cd4f57f5a8835/Finnish/pos_mapped_semantic_lexicon_fin.tsv"
+        ...
+        "xx":
+        {
+            "models":[
+                {
+                    "name": "xx_none_none_none_multilingualsmallbem",
+                    "model_type": "pymusas_neural_tagger",
+                    "pretrained_model_name_or_path": "ucrelnlp/PyMUSAS-Neural-Multilingual-Small-BEM",
+                    "config": {
+                        "tokenizer_kwargs": {
+                            "add_prefix_space": true
+                        }
+                    }
+                },
+                {
+                    "name": "xx_none_none_none_multilingualbasebem",
+                    "model_type": "pymusas_neural_tagger",
+                    "pretrained_model_name_or_path": "ucrelnlp/PyMUSAS-Neural-Multilingual-Base-BEM",
+                    "config": {
+                        "tokenizer_kwargs": {
+                            "add_prefix_space": true
+                        }
+                    }
+                }
+            ],
+            "language_data":{
+                "description": "Multilingual",
+                "macrolanguage": "xx",
+                "script": "xx"
             }
-        ],
-        "model information": {
-            "POS mapper": "UPOS",
-            "spacy version": ">=3.3,<4.0"
-        },
-        "language data":{
-            "description": "Finnish",
-            "macrolanguage": "fi",
-            "script": "Latn"
         }
-    },
-    ...
+    }
 }
 ```
