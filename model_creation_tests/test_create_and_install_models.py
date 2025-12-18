@@ -26,7 +26,7 @@ def test_create_and_install_models(tmp_path: Path,
         # from the GitHub CI tests, so that the runner does not run out of
         # disk space, see: https://github.com/UCREL/pymusas-models/issues/14
         languages_to_remove = ["xx"]
-        english_models_to_remove = ["en_none_none_none_englishbasebem"]#, "en_none_none_none_englishsmallbem"]
+        english_models_to_remove = ["en_none_none_none_englishsmallbem"]  # , "en_none_none_none_englishbasebem"]
 
         github_ci_language_resource_file = Path(tmp_path, 'github_ci_language_resources.json')
         with language_resource_file.open('r', encoding='utf-8') as resource_file:
