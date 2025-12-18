@@ -8,7 +8,7 @@ TEST_TOKENS = ['Sporting', 'community', 'hack', 'had', '.', '49557282', '\t']
 TEST_SPACES = [True] * len(TEST_TOKENS)
 
 
-@pytest.mark.ci
+#@pytest.mark.ci
 def test_small_neural() -> None:
     english_model = spacy.load("en_none_none_none_englishsmallbem")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES)

@@ -26,7 +26,7 @@ def test_create_and_install_models(tmp_path: Path,
         # from the GitHub CI tests, so that the runner does not run out of
         # disk space, see: https://github.com/UCREL/pymusas-models/issues/14
         languages_to_remove = ["xx"]
-        english_models_to_remove = ["en_none_none_none_englishbasebem", "en_none_none_none_englishsmallbem"]
+        english_models_to_remove = ["en_none_none_none_englishbasebem"]#, "en_none_none_none_englishsmallbem"]
 
         github_ci_language_resource_file = Path(tmp_path, 'github_ci_language_resources.json')
         with language_resource_file.open('r', encoding='utf-8') as resource_file:
@@ -62,6 +62,9 @@ def test_create_and_install_models(tmp_path: Path,
     runner_result = runner.invoke(app, command_line_arguments)
     assert 0 == runner_result.exit_code
 
+    # Instal torch separately to ensure it installs the CPU version which is
+    # a smaller install
+    session_virtualenv.install_package("torch", installer="pip", installer_command="install --index-url https://download.pytorch.org/whl/cpu")
     # Install all of the models
     for model_directory in tmp_path.iterdir():
         dist_directory = Path(model_directory, 'dist')
