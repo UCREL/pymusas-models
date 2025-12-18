@@ -66,7 +66,7 @@ jobs:
 
       - name: Code coverage testing (creation tests)
         run: |
-          uv run coverage -m pytest -vvv --virtual-env-directory=./temp_venv --overwrite --github-ci ./model_creation_tests
+          uv run coverage pytest --virtual-env-directory=./temp_venv --overwrite --github-ci ./model_creation_tests
 
       - name: Code coverage report
         run: |    
