@@ -66,11 +66,11 @@ jobs:
 
       - name: Code coverage testing (creation tests)
         run: |
-          uv run coverage pytest --virtual-env-directory=./temp_venv --overwrite --github-ci ./model_creation_tests
+          uv run coverage run -m pytest --virtual-env-directory=./temp_venv --overwrite --github-ci ./model_creation_tests
 
       - name: Code coverage report
         run: |    
-          uv run coverage
+          uv run coverage report
 
       - name: functional tests on Linux and Mac
         if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
