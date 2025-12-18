@@ -1,213 +1,515 @@
-{
-    "cmn": {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Chinese/semantic_lexicon_chi.tsv"
-            }, 
-            {
-                "data type": "mwe", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Chinese/mwe-chi.tsv"
+{   "language_resources": 
+    {
+        "cmn": 
+        {
+            "models": [
+                {
+                    "name": "cmn_single_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Chinese/semantic_lexicon_chi.tsv",
+                                "with_pos": true
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                },
+                {
+                    "name": "cmn_dual_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Chinese/semantic_lexicon_chi.tsv",
+                                "with_pos": true
+                            },
+                            {
+                                "rule_type": "mwe",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Chinese/mwe-chi.tsv"
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                }
+            ],
+            "language_data": {
+                "description": "Mandarin Chinese",
+                "macrolanguage": "zh",
+                "script": "Hani"
             }
-        ],
-        "model information": {
-            "POS mapper": "UPOS"
         },
-        "language data": {
-            "description": "Mandarin Chinese",
-            "macrolanguage": "zh",
-            "script": "Hani"
-        }
-    },
-    "nl" : {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Dutch/semantic_lexicon_dut.tsv"
+        "nl": 
+        {
+            "models": [
+                {
+                    "name": "nl_single_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Dutch/semantic_lexicon_dut.tsv",
+                                "with_pos": true
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                }
+            ],
+            "language_data":{
+                "description": "Dutch, Flemish",
+                "macrolanguage": "nl",
+                "script": "Latn"
             }
-        ],
-        "model information": {
-            "POS mapper": "UPOS"
         },
-        "language data":{
-            "description": "Dutch, Flemish",
-            "macrolanguage": "nl",
-            "script": "Latn"
-        }
-        
-    },
-    "fi" : {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Finnish/semantic_lexicon_fin.tsv"
-            }
-        ],
-        "model information": {
-            "POS mapper": "UPOS",
+        "fi": 
+        {
+            "models": [
+                {
+                    "name": "fi_single_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Finnish/semantic_lexicon_fin.tsv",
+                                "with_pos": true
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                }
+            ],
+            "language_data":{
+                "description": "Finnish",
+                "macrolanguage": "fi",
+                "script": "Latn"
+            },
             "spacy version": ">=3.3,<4.0"
         },
-        "language data":{
-            "description": "Finnish",
-            "macrolanguage": "fi",
-            "script": "Latn"
-        }
-    },
-    "fr": {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/French/semantic_lexicon_fr.tsv"
+        "fr": 
+        {
+            "models": [
+                {
+                    "name": "fr_single_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/French/semantic_lexicon_fr.tsv",
+                                "with_pos": true
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                }
+            ],
+            "language_data":{
+                "description": "French",
+                "macrolanguage": "fr",
+                "script": "Latn"
             }
-        ],
-        "model information": {
-            "POS mapper": "UPOS"
         },
-        "language data":{
-            "description": "French",
-            "macrolanguage": "fr",
-            "script": "Latn"
-        }
-        
-    },
-    "it": {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Italian/semantic_lexicon_ita.tsv"
-            },
-            {
-                "data type": "mwe", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Italian/mwe-ita.tsv"
+        "it": 
+        {
+            "models": [
+                {
+                    "name": "it_single_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Italian/semantic_lexicon_ita.tsv",
+                                "with_pos": true
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                },
+                {
+                    "name": "it_dual_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Italian/semantic_lexicon_ita.tsv",
+                                "with_pos": true
+                            },
+                            {
+                                "rule_type": "mwe",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Italian/mwe-ita.tsv"
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                }
+            ],
+            "language_data": {
+                "description": "Italian",
+                "macrolanguage": "it",
+                "script": "Latn"
             }
-        ],
-        "model information": {
-            "POS mapper": "UPOS"
         },
-        "language data":{
-            "description": "Italian",
-            "macrolanguage": "it",
-            "script": "Latn"
-        }
-        
-    },
-    "pt": {
-        "resources": [
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Portuguese/semantic_lexicon_pt.tsv"
-            },
-            {
-                "data type": "mwe", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Portuguese/mwe-pt.tsv"
+        "pt": 
+        {
+            "models": [
+                {
+                    "name": "pt_single_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Portuguese/semantic_lexicon_pt.tsv",
+                                "with_pos": true
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                },
+                {
+                    "name": "pt_dual_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Portuguese/semantic_lexicon_pt.tsv",
+                                "with_pos": true
+                            },
+                            {
+                                "rule_type": "mwe",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Portuguese/mwe-pt.tsv"
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                }
+            ],
+            "language_data": {
+                "description": "Portuguese",
+                "macrolanguage": "pt",
+                "script": "Latn"
             }
-        ],
-        "model information": {
-            "POS mapper": "UPOS"
         },
-        "language data":{
-            "description": "Portuguese",
-            "macrolanguage": "pt",
-            "script": "Latn"
-        }
-        
-    },
-    "es": {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Spanish/semantic_lexicon_es.tsv"
-            },
-            {
-                "data type": "mwe", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Spanish/mwe-es.tsv"
+        "es": 
+        {
+            "models": [
+                {
+                    "name": "es_single_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Spanish/semantic_lexicon_es.tsv",
+                                "with_pos": true
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                },
+                {
+                    "name": "es_dual_upos2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Spanish/semantic_lexicon_es.tsv",
+                                "with_pos": true
+                            },
+                            {
+                                "rule_type": "mwe",
+                                "pos_mapper": "upos2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Spanish/mwe-es.tsv"
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                }
+            ],
+            "language_data": {
+                "description": "Spanish, Castilian",
+                "macrolanguage": "es",
+                "script": "Latn"
             }
-        ],
-        "model information": {
-            "POS mapper": "UPOS"
         },
-        "language data":{
-            "description": "Spanish, Castilian",
-            "macrolanguage": "es",
-            "script": "Latn"
-        }
-    },
-    "cy": {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Welsh/semantic_lexicon_cy.tsv"
-            },
-            {
-                "data type": "mwe", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Welsh/mwe-welsh.tsv"
+        "cy": 
+        {
+            "models": [
+                {
+                    "name": "cy_single_basiccorcencc2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "basiccorcencc2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Welsh/semantic_lexicon_cy.tsv",
+                                "with_pos": true
+                            }
+                        ],
+                        "default_punctuation_tags": ["Atd"],
+                        "default_number_tags": ["Rhi"]
+                    },
+                    "config": {
+                        "pos_attribute": "tag_"
+                    }
+                },
+                {
+                    "name": "cy_dual_basiccorcencc2usas_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": "basiccorcencc2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Welsh/semantic_lexicon_cy.tsv",
+                                "with_pos": true
+                            },
+                            {
+                                "rule_type": "mwe",
+                                "pos_mapper": "basiccorcencc2usas",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Welsh/mwe-welsh.tsv"
+                            }
+                        ],
+                        "default_punctuation_tags": ["Atd"],
+                        "default_number_tags": ["Rhi"]
+                    },
+                    "config": {
+                        "pos_attribute": "tag_"
+                    }
+                }
+            ],
+            "language_data": {
+                "description": "Welsh",
+                "macrolanguage": "cy",
+                "script": "Latn"
             }
-        ],
-        "model information": {
-            "POS mapper": "BasicCorCenCC"
         },
-        "language data":{
-            "description": "Welsh",
-            "macrolanguage": "cy",
-            "script": "Latn"
-        }
-        
-    },
-    "id": {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Indonesian/semantic_lexicon_id.tsv"
+        "id": 
+        {
+            "models": [
+                {
+                    "name": "id_single_none_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": null,
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Indonesian/semantic_lexicon_id.tsv",
+                                "with_pos": true
+                            }
+                        ],
+                        "default_punctuation_tags": ["Z"],
+                        "default_number_tags": ["CD"]
+                    },
+                    "config": {
+                        "pos_attribute": "tag_"
+                    }
+                }
+            ],
+            "language_data": {
+                "description": "Indonesian",
+                "macrolanguage": "ms",
+                "script": "Latn"
             }
-        ],
-        "model information": {
-            "POS mapper": null
         },
-        "language data":{
-            "description": "Indonesian",
-            "macrolanguage": "ms",
-            "script": "Latn"
-        }
-        
-    },
-    "en" : {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/English/semantic_lexicon_en.tsv"
-            },
-            {
-                "data type": "mwe",
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/English/mwe-en.tsv"
+        "en": 
+        {
+            "models": [
+                {
+                    "name": "en_single_none_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": null,
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/English/semantic_lexicon_en.tsv",
+                                "with_pos": true
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                },
+                {
+                    "name": "en_dual_none_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": null,
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/English/semantic_lexicon_en.tsv",
+                                "with_pos": true
+                            },
+                            {
+                                "rule_type": "mwe",
+                                "pos_mapper": null,
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/English/mwe-en.tsv"
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                },
+                {
+                    "name": "en_none_none_none_englishsmallbem",
+                    "model_type": "pymusas_neural_tagger",
+                    "pretrained_model_name_or_path": "ucrelnlp/PyMUSAS-Neural-English-Small-BEM",
+                    "config": {
+                        "tokenizer_kwargs": {
+                            "add_prefix_space": true
+                        }
+                    }
+                },
+                {
+                    "name": "en_none_none_none_englishbasebem",
+                    "model_type": "pymusas_neural_tagger",
+                    "pretrained_model_name_or_path": "ucrelnlp/PyMUSAS-Neural-English-Base-BEM",
+                    "config": {
+                        "tokenizer_kwargs": {
+                            "add_prefix_space": true
+                        }
+                    }
+                }
+            ],
+            "language_data": {
+                "description": "English",
+                "macrolanguage": "en",
+                "script": "Latn"
             }
-        ],
-        "model information": {
-            "POS mapper": null
         },
-        "language data":{
-            "description": "English",
-            "macrolanguage": "en",
-            "script": "Latn"
-        }
-    },
-    "da" : {
-        "resources":[
-            {
-                "data type": "single", 
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Danish/semantic_lexicon_dk.tsv"
-            },
-            {
-                "data type": "mwe",
-                "url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Danish/mwe-dk.tsv"
+        "da": 
+        {
+            "models": [
+                {
+                    "name": "da_single_none_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": null,
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Danish/semantic_lexicon_dk.tsv",
+                                "with_pos": true
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                },
+                {
+                    "name": "da_dual_none_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": null,
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Danish/semantic_lexicon_dk.tsv",
+                                "with_pos": true
+                            },
+                            {
+                                "rule_type": "mwe",
+                                "pos_mapper": null,
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Danish/mwe-dk.tsv"
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                }
+            ],
+            "language_data": {
+                "description": "Danish",
+                "macrolanguage": "da",
+                "script": "Latn"
             }
-        ],
-        "model information": {
-            "POS mapper": null
         },
-        "language data":{
-            "description": "Danish",
-            "macrolanguage": "da",
-            "script": "Latn"
+        "xx":
+        {
+            "models":[
+                {
+                    "name": "xx_none_none_none_multilingualsmallbem",
+                    "model_type": "pymusas_neural_tagger",
+                    "pretrained_model_name_or_path": "ucrelnlp/PyMUSAS-Neural-Multilingual-Small-BEM",
+                    "config": {
+                        "tokenizer_kwargs": {
+                            "add_prefix_space": true
+                        }
+                    }
+                },
+                {
+                    "name": "xx_none_none_none_multilingualbasebem",
+                    "model_type": "pymusas_neural_tagger",
+                    "pretrained_model_name_or_path": "ucrelnlp/PyMUSAS-Neural-Multilingual-Base-BEM",
+                    "config": {
+                        "tokenizer_kwargs": {
+                            "add_prefix_space": true
+                        }
+                    }
+                }
+            ],
+            "language_data":{
+                "description": "Multilingual",
+                "macrolanguage": "xx",
+                "script": "xx"
+            }
         }
     }
 }

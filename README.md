@@ -64,24 +64,30 @@ Similar to the the spaCy models, our model versioning reflects the compatibility
 
 ## Overview of the models
 
-| Language (BCP 47 language code) | Model Name | MWE | POS Mapper | Ranker | File Size |
-| --- | --- | --- | --- | --- | --- |
-| Mandarin Chinese (cmn) | cmn_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 1.28MB |
-| Mandarin Chinese (cmn) | cmn_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 1.00MB |
-| Welsh (cy) | cy_dual_basiccorcencc2usas_contextual | :heavy_check_mark: | Basic CorCenCC 2 USAS | Contextual | 1.09MB |
-| Welsh (cy) | cy_single_basiccorcencc2usas_contextual | :x: | Basic CorCenCC 2 USAS | Contextual | 1.09MB |
-| Spanish, Castilian (es) | es_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 0.20MB |
-| Spanish, Castilian (es) | es_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.16MB |
-| Finnish (fi) | fi_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.63MB |
-| French (fr) | fr_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.08MB |
-| Indonesian (id) | id_single_none_contextual | :x: | None | Contextual | 0.24MB |
-| Italian (it) | it_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 0.50MB |
-| Italian (it) | it_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.42MB |
-| Dutch, Flemish (nl) | nl_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.15MB |
-| Portuguese (pt) | pt_dual_upos2usas_contextual | :heavy_check_mark: | UPOS 2 USAS | Contextual | 0.27MB |
-| Portuguese (pt) | pt_single_upos2usas_contextual | :x: | UPOS 2 USAS | Contextual | 0.25MB |
-| English (en) | en_dual_none_contextual | :heavy_check_mark: | None | Contextual | 0.88MB |
-| English (en) | en_single_none_contextual | :x: | None | Contextual | 0.73MB |
+| Language (BCP 47 language code) | Model Name | MWE | POS Mapper | Ranker | Neural Model | File Size |
+| --- | --- | --- | --- | --- | --- | --- |
+| Mandarin Chinese (cmn) | cmn_dual_upos2usas_contextual_none | :heavy_check_mark: | UPOS 2 USAS | Contextual | :x: | 1.28MB |
+| Mandarin Chinese (cmn) | cmn_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 1.00MB |
+| Welsh (cy) | cy_dual_basiccorcencc2usas_contextual_none | :heavy_check_mark: | Basic CorCenCC 2 USAS | Contextual | :x: | 1.10MB |
+| Welsh (cy) | cy_single_basiccorcencc2usas_contextual_none | :x: | Basic CorCenCC 2 USAS | Contextual | :x: | 1.09MB |
+| Danish (da) | da_dual_none_contextual_none | :heavy_check_mark: | None | Contextual | :x: | 0.85MB |
+| Danish (da) | da_single_none_contextual_none | :x: | None | Contextual | :x: | 0.68MB |
+| English (en) | en_dual_none_contextual_none | :heavy_check_mark: | None | Contextual | :x: | 0.86MB |
+| English (en) | en_none_none_none_englishsmallbem | :x: | :x: | :x: | [ucrelnlp/PyMUSAS-Neural-English-Small-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-English-Small-BEM) | 60.18MB |
+| English (en) | en_none_none_none_englishbasebem | :x: | :x: | :x: | [ucrelnlp/PyMUSAS-Neural-English-Base-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-English-Base-BEM) | 242.06MB |
+| English (en) | en_single_none_contextual_none | :x: | None | Contextual | :x: | 0.71MB |
+| Spanish, Castilian (es) | es_dual_upos2usas_contextual_none | :heavy_check_mark: | UPOS 2 USAS | Contextual | :x: | 0.26MB |
+| Spanish, Castilian (es) | es_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.20MB |
+| Finnish (fi) | fi_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.64MB |
+| French (fr) | fr_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.08MB |
+| Indonesian (id) | id_single_none_contextual_none | :x: | None | Contextual | :x: | 0.24MB |
+| Italian (it) | it_dual_upos2usas_contextual_none | :heavy_check_mark: | UPOS 2 USAS | Contextual | :x: | 0.50MB |
+| Italian (it) | it_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.42MB |
+| Dutch, Flemish (nl) | nl_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.15MB |
+| Portuguese (pt) | pt_dual_upos2usas_contextual_none | :heavy_check_mark: | UPOS 2 USAS | Contextual | :x: | 0.27MB |
+| Portuguese (pt) | pt_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.25MB |
+| Multilingual (xx) | xx_none_none_none_multilingualsmallbem | :x: | :x: | :x: | [ucrelnlp/PyMUSAS-Neural-Multilingual-Small-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-Multilingual-Small-BEM) | 501.45MB |
+| Multilingual (xx) | xx_none_none_none_multilingualbasebem | :x: | :x: | :x: | [ucrelnlp/PyMUSAS-Neural-Multilingual-Base-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-Multilingual-Base-BEM) | 1089.74MB |
 
 * MWE -- :heavy_check_mark: means that the model supports identification and tagging of Multi Word Expressions.
 

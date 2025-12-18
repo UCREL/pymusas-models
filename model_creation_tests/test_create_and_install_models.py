@@ -15,7 +15,7 @@ def test_create_and_install_models(tmp_path: Path,
     #                                   installer="pip")
     # session_virtualenv.install_package(f"-r {dev_requirements_file}",
     #                                   installer="pip")
-    session_virtualenv.install_package(f"{str(repo_directory)}", installer="pip")
+    # session_virtualenv.install_package(f"{str(repo_directory)}", installer="pip")
 
     language_resource_file = Path(repo_directory, 'language_resources.json')
     runner = CliRunner()

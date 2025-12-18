@@ -9,7 +9,7 @@ TEST_SPACES = [True] * len(TEST_TOKENS)
 
 
 def test_single_UPOS_contextual() -> None:
-    indonesian_model = spacy.load("id_single_none_contextual")
+    indonesian_model = spacy.load("id_single_none_contextual_none")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, tags=TEST_TAGS)
     output = indonesian_model(doc)
     expected_output = [

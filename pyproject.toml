@@ -33,6 +33,7 @@ dependencies = [
     "catalogue>=2.0.6,<2.1.0",
     "thinc>=8.0.12,<8.4.0",
     "wheel>=0.45.1",
+    "pydantic>=2.12.4",
 ]
 
 [project.urls]

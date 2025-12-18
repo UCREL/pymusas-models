@@ -9,7 +9,7 @@ TEST_SPACES = [True] * len(TEST_TOKENS)
 
 
 def test_single_UPOS_contextual() -> None:
-    danish_model = spacy.load("da_single_none_contextual")
+    danish_model = spacy.load("da_single_none_contextual_none")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, pos=TEST_POS)
     output = danish_model(doc)
     expected_output = [
@@ -28,7 +28,7 @@ def test_single_UPOS_contextual() -> None:
 
 
 def test_dual_UPOS_contextual() -> None:
-    danish_model = spacy.load("da_dual_none_contextual")
+    danish_model = spacy.load("da_dual_none_contextual_none")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, pos=TEST_POS)
     output = danish_model(doc)
     expected_output = [

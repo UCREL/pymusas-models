@@ -3,13 +3,13 @@ from spacy.tokens import Doc
 from spacy.vocab import Vocab
 
 
-TEST_TOKENS = ['24', 'horas', 'por', 'dia', '.', '5']
-TEST_POS = ['NUM', 'NOUN', 'ADP', 'NOUN', 'PUNCT', 'NUM']
+TEST_TOKENS = ['24', 'horas', 'por', 'dia', '.', '5', 'China']
+TEST_POS = ['NUM', 'NOUN', 'ADP', 'NOUN', 'PUNCT', 'NUM', 'NOUN']
 TEST_SPACES = [True] * len(TEST_TOKENS)
 
 
 def test_single_UPOS_contextual() -> None:
-    portuguese_model = spacy.load("pt_single_upos2usas_contextual")
+    portuguese_model = spacy.load("pt_single_upos2usas_contextual_none")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, pos=TEST_POS)
     output = portuguese_model(doc)
     expected_output = [
@@ -18,7 +18,8 @@ def test_single_UPOS_contextual() -> None:
         ['A5.1+', 'S8+', 'M6', 'Z5'],
         ['T1.3'],
         ['PUNCT'],
-        ['N1']
+        ['N1'],
+        ['Z2']
     ]
 
     assert len(expected_output) == len(output)
@@ -28,7 +29,7 @@ def test_single_UPOS_contextual() -> None:
 
 
 def test_dual_UPOS_contextual() -> None:
-    portuguese_model = spacy.load("pt_dual_upos2usas_contextual")
+    portuguese_model = spacy.load("pt_dual_upos2usas_contextual_none")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES, pos=TEST_POS)
     output = portuguese_model(doc)
     expected_output = [
@@ -37,7 +38,8 @@ def test_dual_UPOS_contextual() -> None:
         ['T2+++'],
         ['T2+++'],
         ['PUNCT'],
-        ['N1']
+        ['N1'],
+        ['Z2']
     ]
 
     assert len(expected_output) == len(output)
