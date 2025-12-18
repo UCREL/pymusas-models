@@ -32,14 +32,24 @@ def string_to_path(value: str) -> Path:
 def pytest_addoption(parser: Parser) -> None:
     parser.addoption(
         "--virtual-env-directory", action="store",
-        help="",
+        help="Where to create the virtual environment directory",
         default=None,
         type=string_to_path
     )
     parser.addoption(
         "--overwrite", action="store_true",
-        help=""
+        help="Whether to overwrite the virtual environment directory"
     )
+    parser.addoption(
+        "--github-ci", action="store_true",
+        help="If the test is being ran within the GitHub actions CI"
+    )
+
+
+@pytest.fixture(scope="session", autouse=True)
+def github_ci(request: SubRequest) -> bool:
+    return cast(bool,
+                request.config.getoption("--github-ci"))
 
 
 @pytest.fixture(scope="session", autouse=True)

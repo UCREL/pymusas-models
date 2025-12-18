@@ -1,3 +1,4 @@
+import pytest
 import spacy
 from spacy.tokens import Doc
 from spacy.vocab import Vocab
@@ -27,6 +28,7 @@ def test_small_neural() -> None:
         assert [(token_index, token_index + 1)] == token._.pymusas_mwe_indexes
 
 
+@pytest.mark.ci
 def test_base_neural() -> None:
     english_model = spacy.load("en_none_none_none_englishbasebem")
     doc = Doc(Vocab(), words=TEST_TOKENS, spaces=TEST_SPACES)

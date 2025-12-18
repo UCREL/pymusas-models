@@ -278,6 +278,22 @@ deactivate
 
 </details>
 
+### Tests on the GitHub Actions CI
+
+The tests run on a subset of the models created on the GitHub actions CI, this is due to disk space restrictions on the GitHub actions runners, see this issue [https://github.com/UCREL/pymusas-models/issues/14](https://github.com/UCREL/pymusas-models/issues/14). To note the models we do not run on are:
+
+* All `xx` multilingual models.
+* English base neural model.
+
+To run the tests locally in the way they are run on the GitHub actions CI:
+
+``` bash
+rm -rf ./temp_venv
+uv run -m pytest -vvv --virtual-env-directory=./temp_venv --overwrite --github-ci ./model_creation_tests
+source ./temp_venv/venv/bin/activate
+pytest --github-ci ./model_function_tests
+deactivate
+```
 
 ## Language Resource Meta Data
 
