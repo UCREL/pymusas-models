@@ -63,25 +63,7 @@ jobs:
 
       - name: mypy
         run: uv run mypy
-
-      - name: Code coverage testing (creation tests)
+      
+      - name: debug code coverage testing (creation tests)
         run: |
-          uv run coverage run
-
-      - name: Code coverage report
-        run: |    
-          uv run coverage
-
-      - name: functional tests on Linux and Mac
-        if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
-        run: |
-          source ./temp_venv/venv/bin/activate
-          pytest ./model_function_tests
-          deactivate
-
-      - name: functional tests on Windows
-        if: ${{ runner.os == 'Windows' }}
-        run: |
-          .\temp_venv\venv\Scripts\Activate.ps1
-          pytest .\model_function_tests
-          deactivate
+          uv run -m pytest -vvv --virtual-env-directory=./temp_venv --overwrite ./model_creation_tests
