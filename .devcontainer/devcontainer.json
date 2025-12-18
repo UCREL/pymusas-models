@@ -4,11 +4,12 @@
 	"name": "Python",
 	"remoteUser": "ubuntu",
 	"updateRemoteUserUID": true,
+	"image": "ghcr.io/ucrel/pymusas-models-dev-container:latest",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"build": {
-		"dockerfile": "Dockerfile",
-		"context": ".."
-	},
+	//"build": {
+	//	"dockerfile": "Dockerfile",
+	//	"context": ".."
+	//},
 	"customizations": {
 		// Configure properties specific to VS Code.
 		"vscode": {
