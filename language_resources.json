@@ -444,7 +444,7 @@
                             {
                                 "rule_type": "single",
                                 "pos_mapper": null,
-                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Danish/semantic_lexicon_dk.tsv",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/1f4d7854ceb274fae362c33e51f080777f9996a3/Danish/semantic_lexicon_dk.tsv",
                                 "with_pos": true
                             }
                         ],
@@ -461,13 +461,13 @@
                             {
                                 "rule_type": "single",
                                 "pos_mapper": null,
-                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/2cc9966a3bdcc84bc204d16bdf4318fc28495016/Danish/semantic_lexicon_dk.tsv",
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/1f4d7854ceb274fae362c33e51f080777f9996a3/Danish/semantic_lexicon_dk.tsv",
                                 "with_pos": true
                             },
                             {
                                 "rule_type": "mwe",
                                 "pos_mapper": null,
-                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/7ccc8baaea36f3fd249e77671db5638c1cba6136/Danish/mwe-dk.tsv"
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/1f4d7854ceb274fae362c33e51f080777f9996a3/Danish/mwe-dk.tsv"
                             }
                         ],
                         "default_punctuation_tags": ["PUNCT"],

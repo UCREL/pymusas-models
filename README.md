@@ -70,8 +70,8 @@ Similar to the the spaCy models, our model versioning reflects the compatibility
 | Mandarin Chinese (cmn) | cmn_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 1.00MB |
 | Welsh (cy) | cy_dual_basiccorcencc2usas_contextual_none | :heavy_check_mark: | Basic CorCenCC 2 USAS | Contextual | :x: | 1.10MB |
 | Welsh (cy) | cy_single_basiccorcencc2usas_contextual_none | :x: | Basic CorCenCC 2 USAS | Contextual | :x: | 1.09MB |
-| Danish (da) | da_dual_none_contextual_none | :heavy_check_mark: | None | Contextual | :x: | 0.85MB |
-| Danish (da) | da_single_none_contextual_none | :x: | None | Contextual | :x: | 0.68MB |
+| Danish (da) | da_dual_none_contextual_none | :heavy_check_mark: | None | Contextual | :x: | 0.82MB |
+| Danish (da) | da_single_none_contextual_none | :x: | None | Contextual | :x: | 0.63MB |
 | English (en) | en_dual_none_contextual_none | :heavy_check_mark: | None | Contextual | :x: | 0.86MB |
 | English (en) | en_none_none_none_englishsmallbem | :x: | :x: | :x: | [ucrelnlp/PyMUSAS-Neural-English-Small-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-English-Small-BEM) | 60.18MB |
 | English (en) | en_none_none_none_englishbasebem | :x: | :x: | :x: | [ucrelnlp/PyMUSAS-Neural-English-Base-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-English-Base-BEM) | 242.06MB |
