@@ -476,3 +476,22 @@ Below is an extract of the [./language_resources.json](./language_resources.json
     }
 }
 ```
+
+## Potential Errors
+
+### Language code key error
+
+If you see an error like the following (`zsm` is a language code):
+
+``` bash
+KeyError: 'zsm'
+```
+
+or
+
+``` bash
+FAILED model_creation_tests/test_create_and_install_models.py::test_create_and_install_models - AssertionError: assert 0 == 1
+ +  where 1 = <Result KeyError('zsm')>.exit_code
+```
+
+Then it is due to the language code for the newly added language to the [./language_resources.json](./language_resources.json) file not mapping directly to a spaCy language code for that language (this is required to create a blank `spacy.Language` object). To fix this add the mapping for the newly added language code to the spaCy language code to the `PYMUSAS_LANG_TO_SPACY` dictionary wihtin [./pymusas_models/__main__.py](./pymusas_models/__main__.py). spaCy language code can be found at [https://spacy.io/usage/models](https://spacy.io/usage/models).

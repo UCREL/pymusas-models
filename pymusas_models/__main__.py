@@ -50,7 +50,8 @@ PYMUSAS_LANG_TO_SPACY = {
     'fi': 'fi',
     'en': 'en',
     'da': 'da',
-    'xx': 'xx'
+    'xx': 'xx',
+    'zsm': 'ms'
 }
 POS_MAPPER_TO_NAME = {
     'UPOS': 'upos2usas',

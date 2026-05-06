@@ -88,6 +88,7 @@ Similar to the the spaCy models, our model versioning reflects the compatibility
 | Portuguese (pt) | pt_single_upos2usas_contextual_none | :x: | UPOS 2 USAS | Contextual | :x: | 0.25MB |
 | Multilingual (xx) | xx_none_none_none_multilingualsmallbem | :x: | :x: | :x: | [ucrelnlp/PyMUSAS-Neural-Multilingual-Small-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-Multilingual-Small-BEM) | 501.45MB |
 | Multilingual (xx) | xx_none_none_none_multilingualbasebem | :x: | :x: | :x: | [ucrelnlp/PyMUSAS-Neural-Multilingual-Base-BEM](https://huggingface.co/ucrelnlp/PyMUSAS-Neural-Multilingual-Base-BEM) | 1089.74MB |
+| Standard Malay (zsm) | zsm_single_none_contextual_none | :x: | None | Contextual | :x: | 0.31MB |
 
 * MWE -- :heavy_check_mark: means that the model supports identification and tagging of Multi Word Expressions.
 
