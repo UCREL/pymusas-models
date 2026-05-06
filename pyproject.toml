@@ -18,13 +18,14 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Scientific/Engineering",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research"
 ]
-requires-python = ">=3.10, <3.14"
+requires-python = ">=3.10, <3.15"
 dependencies = [
-    "pymusas[neural]==0.4.0",
+    "pymusas[neural]==0.4.1",
     "spacy>=3.1.4",
     "wasabi>=0.8.1,<1.2.0",
     "srsly>=2.4.1,<3.0",
@@ -43,13 +44,21 @@ Issues = "https://github.com/UCREL/pymusas-models/issues"
 "pymusas-models" = "pymusas_models.__main__:app"
 
 [build-system]
-requires = ["uv_build>=0.9.6,<0.10.0"]
+requires = ["uv_build>=0.9.6,<0.12.0"]
 build-backend = "uv_build"
 
 
 [tool.uv.build-backend]
 module-name = "pymusas_models"
 module-root = ""
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url  = "https://download.pytorch.org/whl/cpu"
+explicit = true
 
 [dependency-groups]
 dev = [
@@ -63,6 +72,7 @@ dev = [
     "pytest-virtualenv>=1.8.1,<2.0.0",
     "fastcore>=1.7.2,<2.0.0",
     "ghapi>=0.1.20,<2.0.0",
+    "torch",  # resolved via pytorch-cpu source for local/CI use
 ]
 
 

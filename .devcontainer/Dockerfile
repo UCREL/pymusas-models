@@ -28,4 +28,8 @@ ENV PATH="/home/$USERNAME/.local/bin/:$PATH"
 
 RUN --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     --mount=type=bind,source=.python-version,target=.python-version \
+    uv python install
+
+RUN --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    --mount=type=bind,source=.python-version,target=.python-version \
     uv sync --no-install-project --no-install-workspace
