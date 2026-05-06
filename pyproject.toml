@@ -72,6 +72,7 @@ dev = [
     "pytest-virtualenv>=1.8.1,<2.0.0",
     "fastcore>=1.7.2,<2.0.0",
     "ghapi>=0.1.20,<2.0.0",
+    "torch",  # resolved via pytorch-cpu source for local/CI use
 ]
 
 
