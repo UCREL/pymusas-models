@@ -481,6 +481,33 @@
                 "script": "Latn"
             }
         },
+        "zsm": 
+        {
+            "models": [
+                {
+                    "name": "zsm_single_none_contextual_none",
+                    "model_type": "pymusas_rule_based_tagger",
+                    "resources":{
+                        "ranker": "contextual",
+                        "rules": [
+                            {
+                                "rule_type": "single",
+                                "pos_mapper": null,
+                                "lexicon_url": "https://raw.githubusercontent.com/UCREL/Multilingual-USAS/442dc9a975ea1c3b0db20246a5a58565a200d581/Malay/semantic_lexicon_ms.tsv",
+                                "with_pos": false
+                            }
+                        ],
+                        "default_punctuation_tags": ["PUNCT"],
+                        "default_number_tags": ["NUM"]
+                    }
+                }
+            ],
+            "language_data": {
+                "description": "Standard Malay",
+                "macrolanguage": "ms",
+                "script": "Latn"
+            }
+        },
         "xx":
         {
             "models":[
